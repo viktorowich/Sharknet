@@ -1,0 +1,3 @@
+[submodule "SharkNetJavaFX"]
+	path = SharkNetJavaFX
+	url = https://github.com/yveskaufmann/SharkNetJavaFX.git
