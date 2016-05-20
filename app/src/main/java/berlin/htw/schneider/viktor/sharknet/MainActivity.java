@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openChat(View view)
     {
-        Intent chat = new Intent(this, Chat.class);
-        startActivity(chat);
+        Intent inbox = new Intent(this, Inbox.class);
+        startActivity(inbox);
     }
 }
