@@ -7,7 +7,7 @@
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton" android:background="@drawable/default_profile"/>
+            android:id="@+id/chat_image" android:background="@drawable/default_profile"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

@@ -2,7 +2,6 @@ package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -14,9 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import berlin.htw.schneider.viktor.sharknet.api.ImplSharkNet;
+
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Chat extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+{
+
+    private List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats;
+    private ImplSharkNet sharkNet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,12 @@ public class Chat extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        chats = sharkNet.getChats();
+        ChatListAdapter chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
+        ListView lv = (ListView)findViewById(R.id.chatsListView);
+        lv.setAdapter(chatListAdapter);
+
     }
 
     @Override
