@@ -1,6 +1,7 @@
 package berlin.htw.schneider.viktor.sharknet.api;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,10 +10,15 @@ import java.util.List;
  */
 public class ImplFeed implements Feed {
 
-	String content,sender;
+	//Todo: Content class mit getFiletype (aus Shark), Inputstream weiter reichen
+
+
+	String content;
+
 	List<Comment> comment_list = new LinkedList<>();
 	Timestamp datetime;
 	Interest interest;
+	Contact sender;
 
 	//ToDo: Clearify - safe Method has always to be colled explicit
 
@@ -23,15 +29,11 @@ public class ImplFeed implements Feed {
 	 * @param interest
 	 * @param sender
      */
-	public ImplFeed(String content, Interest interest, String sender){
+	public ImplFeed(String content, Interest interest, Contact sender){
 		this.content = content;
 		this.interest = interest;
 		this.sender = sender;
-		java.util.Date date= new java.util.Date();
-		datetime.setTime(date.getTime());
-		safeInKB();
-
-		//ToDo: clearify - if sender is contact
+		datetime = new Timestamp(new Date().getTime());
 	}
 
 	/**
@@ -41,7 +43,7 @@ public class ImplFeed implements Feed {
 	 * @param sender
      * @param datetime
      */
-	public ImplFeed(String content, Interest interest, String sender, Timestamp datetime){
+	public ImplFeed(String content, Interest interest, Contact sender, Timestamp datetime){
 		this.sender = sender;
 		this.interest = interest;
 		this.content = content;
@@ -64,7 +66,7 @@ public class ImplFeed implements Feed {
 	}
 
 	@Override
-	public String getSender() {
+	public Contact getSender() {
 		return sender;
 	}
 
@@ -75,14 +77,23 @@ public class ImplFeed implements Feed {
 	}
 
 	@Override
-	public void newComment(String comment, String author) {
+	public void newComment(String comment, Contact author) {
 		Comment c = new ImplComment(comment, author, this);
 		comment_list.add(c);
 	}
 
 	@Override
-	public void safeInKB(){
-		//ToDo: Shark - safe Feed in KB
+	public void save() {
+		//ToDo: Shark - safe Feed in KB and sends it
+		//Implementation of DummyDB
+		DummyDB.getInstance().addfeed(this);
+	}
+
+	@Override
+	public void delete() {
+		//ToDo: Shark - delte Feed in KB
+		//Implementation of DummyDB
+		DummyDB.getInstance().removefeed(this);
 	}
 }
 

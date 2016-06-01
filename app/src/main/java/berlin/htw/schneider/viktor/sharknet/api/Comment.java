@@ -9,12 +9,11 @@ import java.sql.Timestamp;
  */
 public interface Comment {
 
-
 	/**
 	 * Returns the author of a comment
 	 * @return
      */
-    public String getSender();
+    public Contact getSender();
 
 	/**
 	 * Returns the Date and Time a comment was created
@@ -37,11 +36,11 @@ public interface Comment {
 	/**
 	 * Deletes Comment from DB
 	 */
-	public void deleteComment();
+	public void delete();
 
 	/**
 	 * safes the comment in the DB and sends it
 	 */
-	public void safeInKB();
+	public void save();
 }
 

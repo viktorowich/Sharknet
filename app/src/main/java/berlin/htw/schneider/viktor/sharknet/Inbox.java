@@ -13,9 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import berlin.htw.schneider.viktor.sharknet.api.ImplSharkNet;
 
 public class Inbox extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    public static ImplSharkNet implSharkNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +27,6 @@ public class Inbox extends AppCompatActivity
         setContentView(R.layout.activity_inbox);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -34,6 +36,8 @@ public class Inbox extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override

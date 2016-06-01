@@ -36,7 +36,7 @@ public interface SharkNet {
 	/**
 	 * initializes a new Feed an Safes it in the Knowledgebase
 	 */
-	public Feed newFeed(String content, Interest interest, String sender);
+	public Feed newFeed(String content, Interest interest, Contact sender);
 
 
 	/**
@@ -48,9 +48,9 @@ public interface SharkNet {
 
 	/**
 	 * Initializes a Chat and safes it in the KnowledgeBase
-	 * @param c
+	 * @param recipients
 	 */
-	public Chat newChat(Contact c);
+	public Chat newChat(List<Contact> recipients);
 
 	/**
 	 * Adds a Contact to the KnowledgeBase

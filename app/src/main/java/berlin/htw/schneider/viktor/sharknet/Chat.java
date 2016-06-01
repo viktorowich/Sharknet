@@ -13,20 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import berlin.htw.schneider.viktor.sharknet.api.ImplSharkNet;
 
-
-import java.util.LinkedList;
 import java.util.List;
 
 public class Chat extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
 
+    public static final String CHAT_TITLE ="CHAT_TITLE" ;
     private List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats;
-    private ImplSharkNet sharkNet;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +50,22 @@ public class Chat extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        chats = sharkNet.getChats();
+        chats = MainActivity.implSharkNet.getChats();
         ChatListAdapter chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
         ListView lv = (ListView)findViewById(R.id.chatsListView);
-        lv.setAdapter(chatListAdapter);
+        if (lv != null) {
+            lv.setAdapter(chatListAdapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(Chat.this,ChatDetailActivity.class);
+
+                    intent.putExtra(CHAT_TITLE,chats.get(position).getTitle());
+                    startActivity(intent);
+                }
+            });
+        }
 
     }
 

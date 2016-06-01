@@ -2,6 +2,8 @@ package berlin.htw.schneider.viktor.sharknet.api;
 
 
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by timol on 16.05.2016.
@@ -9,7 +11,8 @@ import java.sql.Timestamp;
 public class ImplMessage implements Message {
 
 	String message;
-	Contact sender, recipient;
+	Contact sender;
+	List<Contact> recipient_list;
 	Timestamp time;
 	boolean isSigned, isEncrypted;
 
@@ -18,15 +21,15 @@ public class ImplMessage implements Message {
 	 * @param message
 	 * @param time
 	 * @param sender
-	 * @param recipient
+	 * @param recipient_list
 	 * @param isSigned
      * @param isEncrypted
      */
-	public ImplMessage(String message, Timestamp time, Contact sender, Contact recipient, boolean isSigned, boolean isEncrypted){
+	public ImplMessage(String message, Timestamp time, Contact sender, List<Contact> recipient_list, boolean isSigned, boolean isEncrypted){
 		this.message = message;
 		this.time = time;
 		this.sender = sender;
-		this.recipient = recipient;
+		this.recipient_list= recipient_list;
 		this.isSigned = isSigned;
 		this.isEncrypted = isEncrypted;
 
@@ -35,12 +38,15 @@ public class ImplMessage implements Message {
 	/**
 	 * Constuctor for New Messages that are going to be sended
 	 * @param message
-	 * @param recipient
+	 * @param recipient_list
      */
 
-	public ImplMessage(String message, Contact recipient){
+	public ImplMessage(String message, List<Contact> recipient_list){
 		this.message = message;
-		this.recipient = recipient;
+		this.recipient_list = recipient_list;
+		Calendar calendar = Calendar.getInstance();
+		java.util.Date now = calendar.getTime();
+		time = new Timestamp(now.getTime());
 		sendMessage();
 	}
 
@@ -49,6 +55,9 @@ public class ImplMessage implements Message {
 	 */
 	private void sendMessage(){
 		//ToDo: Shark - safe the Message in the Database and send it
+		//DummyDB Implementation
+		DummyDB db = DummyDB.getInstance();
+		db.addMessage(this, getChat());
 	}
 
 	@Override
@@ -61,8 +70,8 @@ public class ImplMessage implements Message {
 	}
 
 	@Override
-	public Contact getRecipient() {
-		return recipient;
+	public List<Contact> getRecipients() {
+		return recipient_list;
 	}
 
 	@Override
@@ -87,4 +96,29 @@ public class ImplMessage implements Message {
 		//ToDo: Shark - delete the message from the Database
 
 	}
+
+	/**
+	 * Method is called to find the Chat the Message belongs to in the DummyDB
+	 * @return
+     */
+
+	private Chat getChat(){
+		DummyDB db = DummyDB.getInstance();
+		List<Chat> chats = db.getChat_list();
+		for(Chat c : chats){
+			List<Contact> cs = c.getContacts();
+			if(cs.equals(recipient_list)){
+				return c;
+			}
+/*			for(Contact currentc : cs){
+				if(currentc.getUID().equals(rec_uid)){
+					return c;
+				}
+		}
+*/
+		}
+		return null;
+
+	}
+	//ToDo: Dummy - does not work with groupchats
 }

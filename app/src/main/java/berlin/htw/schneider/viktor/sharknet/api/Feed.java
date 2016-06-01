@@ -30,7 +30,7 @@ public interface Feed {
 	 * returns the Author of a Feed
 	 * @return
 	 */
-    public String getSender();
+    public Contact getSender();
 
 	/**
 	 * Returns a List of comments referencing the feed
@@ -42,10 +42,11 @@ public interface Feed {
 	 * adds and safes a comment to a feed
 	 * @param comment
 	 */
-	public void newComment(String comment, String author);
+	public void newComment(String comment, Contact author);
 
 	/**
 	 * Safes the Feed in the Database and sends it
 	 */
-	public void safeInKB();
+	public void save();
+	public void delete();
 }
