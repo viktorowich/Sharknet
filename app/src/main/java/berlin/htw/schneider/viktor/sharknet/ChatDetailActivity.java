@@ -1,11 +1,13 @@
 package berlin.htw.schneider.viktor.sharknet;
 
-import android.content.Intent;
+
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
+
+import android.widget.EditText;
 import android.widget.ListView;
 import berlin.htw.schneider.viktor.sharknet.api.Message;
 
@@ -15,6 +17,8 @@ import java.util.Objects;
 
 public class ChatDetailActivity extends AppCompatActivity {
 
+    private berlin.htw.schneider.viktor.sharknet.api.Chat chat ;
+    private MsgListAdapter msgListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +36,13 @@ public class ChatDetailActivity extends AppCompatActivity {
             if(Objects.equals(chat.getTitle(), chatTitle))
             {
                 msgs = chat.getMessages();
+                this.chat = chat;
             }
         }
 
         //TODO: muss später nach der ID gehen und nicht nach den Titel
 
-        MsgListAdapter msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,msgs);
+        this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,msgs);
         ListView lv = (ListView)findViewById(R.id.msg_list_view);
         if (lv != null)
         {
@@ -58,4 +63,21 @@ public class ChatDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
+    public void sendMessage(View view)
+    {
+        EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
+        String msg_string = msg_text.getText().toString();
+        if(msg_string.isEmpty())
+        {
+            msg_string = "ist leider leer";
+        }
+        Snackbar.make(view, msg_string, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+        chat.sendMessage(msg_string);
+
+        this.msgListAdapter.notifyDataSetChanged();
+        msg_text.getText().clear();
+
+    }
 }
