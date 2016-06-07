@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 /**
  * Created by timol on 12.05.2016.

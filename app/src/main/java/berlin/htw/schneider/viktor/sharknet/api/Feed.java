@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
  *
  * Interface represents the Feed-Functionality (Timeline)
  */
-public interface Feed {
+public interface Feed extends Timeable, ContainsContent{
 	/**
 	 * Returns the name of the interest the feed references to
 	 * @return
@@ -24,8 +24,8 @@ public interface Feed {
 	 * returns the content of a Message
 	 * @return
 	 */
-	//ToDo: Implement - File - Mime Type integrieren
-    public String getContent();
+
+    public Content getContent();
 	/**
 	 * returns the Author of a Feed
 	 * @return
@@ -34,19 +34,41 @@ public interface Feed {
 
 	/**
 	 * Returns a List of comments referencing the feed
-	 * @param count
 	 * @return
      */
-    public List<Comment> getComments(int count);
+    public List<Comment> getComments();
+	public List<Comment> getComments(int startIndex, int stopIndex);
+	public List<Comment> getComments(Timestamp start, Timestamp stop);
+	public List<Comment> getComments(Timestamp start, Timestamp stop, int startIndex, int stopIndex);
+	public List<Comment> getComments(String search, int startIndex, int stopIndex);
+
+
 	/**
 	 * adds and safes a comment to a feed
 	 * @param comment
 	 */
-	public void newComment(String comment, Contact author);
+	public void newComment(Content comment, Contact author);
 
 	/**
-	 * Safes the Feed in the Database and sends it
+	 * Deletes the Feed from the Database
 	 */
-	public void save();
 	public void delete();
+
+	/**
+	 * marks the Feed as disliked. Shark will collect dislikes and after an special amount it will inform the author
+	 */
+	public void dislike();
+
+	/**
+	 * Returns if the Comment is disliked
+	 */
+	public boolean isdisliked();
+
+	/**
+	 * Returns the Owner of a Feed
+	 * @return
+     */
+	public Profile getOwner();
+
+
 }

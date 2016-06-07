@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -7,16 +7,18 @@ import java.util.List;
  * Created by timol on 16.05.2016.
  */
 
-//ToDo: Clearify - Groups as own Interface/ImplClass
-//ToDo: Implement - publicKey can be null
-//ToDo: Implement - Contactpicture
-
 public class ImplContact implements Contact {
+
+	//ToDo: Implement - Generate KeyPairs
+
+
 
 	String nickname;
 	String uid;
 	String publickey;
 	List<Interest> interest_list = new LinkedList<>();
+	Profile owner;
+	Content picture;
 
 
 	/**
@@ -25,15 +27,31 @@ public class ImplContact implements Contact {
 	 * @param uid
 	 * @param publickey
      */
-	public ImplContact(String nickname, String uid, String publickey){
+	public ImplContact(String nickname, String uid, String publickey, Profile owner){
 		this.nickname = nickname;
 		this.uid = uid;
 		this.publickey = publickey;
-		//ToDo: Clearify - public key exchange
+		this.owner = owner;
+		save();
 
 	}
 
-	@Override
+	/**
+	 * Contructor for the Objects from the Database which are not going to be saved
+	 */
+
+	public ImplContact(String nickname, String uid, String publickey, Profile owner, Content pic, List<Interest> interest_list){
+
+		this.nickname = nickname;
+		this.uid = uid;
+		this.publickey = publickey;
+		this.interest_list = interest_list;
+		this.owner = owner;
+		this.picture = pic;
+	}
+
+
+		@Override
 	public String getNickname() {
 		return nickname;
 	}
@@ -50,6 +68,20 @@ public class ImplContact implements Contact {
 		return interest_list;
 	}
 
+	@Override
+	public boolean isEqual(Contact c) {
+
+		if(c.getNickname().equals(nickname) && c.getUID().equals(uid) && c.getPublicKey().equals(publickey)){
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public Profile getOwner() {
+		return owner;
+	}
+
 
 	@Override
 	public String getUID() {
@@ -63,19 +95,19 @@ public class ImplContact implements Contact {
 	}
 
 	@Override
-	public String getPicture() {
-
-		//ToDo: Implement - Profilepictures
-		return null;
+	public Content getPicture() {
+		return picture;
 	}
 
 	@Override
-	public void setPicture(String pic) {
-
+	public void setPicture(Content pic) {
+		this.picture = pic;
 	}
 
 	@Override
 	public String getPublicKey() {
+		//ToDo: Public key getter nur fingerprint bzw readable
+
 		return publickey;
 	}
 
@@ -100,11 +132,24 @@ public class ImplContact implements Contact {
 
 	}
 
-	@Override
-	public void save(){
+	/**
+	 * Save the Contact to the Database
+	 */
+
+	private void save(){
 		//ToDo: Shark - Safe Contact in KB
 		//Implementation of DummyDB
 		DummyDB.getInstance().addContact(this);
 
 	}
+
+	/**
+	 * This Method is just used to make the Contact for a Profile
+	 * @param p
+     */
+	public void setOwner(Profile p){
+		this.owner = p;
+	}
+
+
 }

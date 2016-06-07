@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import berlin.htw.schneider.viktor.sharknet.api.*;
 import berlin.htw.schneider.viktor.sharknet.api.Chat;
-import berlin.htw.schneider.viktor.sharknet.api.Contact;
-import berlin.htw.schneider.viktor.sharknet.api.Message;
-
 
 
 import java.util.List;
@@ -46,7 +44,7 @@ public class ChatListAdapter extends ArrayAdapter<berlin.htw.schneider.viktor.sh
         TextView text = (TextView) convertView.findViewById(R.id.msg_text);
         List<Message> msgs      = chat.getMessages();
         Message last_msg        = msgs.get(msgs.size()-1);
-        String content          = last_msg.getContent();
+        Content content          = last_msg.getContent();
         String sender = "Nulli";
 
         // TODO: Nickname vom Sender lässt sich noch nicht abrufen

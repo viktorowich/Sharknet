@@ -9,11 +9,7 @@ import android.view.View;
 
 import android.widget.EditText;
 import android.widget.ListView;
-import berlin.htw.schneider.viktor.sharknet.api.Message;
 
-
-import java.util.List;
-import java.util.Objects;
 
 public class ChatDetailActivity extends AppCompatActivity {
 
@@ -26,38 +22,26 @@ public class ChatDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String chatTitle = getIntent().getStringExtra(Chat.CHAT_TITLE);
+        int chatID = getIntent().getIntExtra(Chat.CHAT_ID,0);
 
-        List<Message> msgs = null;
+        List<net.sharksystem.sharknet.api.Message> msgs = null;
         List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
 
+        //TODO: not the best way // would be better to use getChatbyID()
         for(berlin.htw.schneider.viktor.sharknet.api.Chat chat : chats)
         {
-            if(Objects.equals(chat.getTitle(), chatTitle))
+            if(chat.getID() == chatID)
             {
                 msgs = chat.getMessages();
                 this.chat = chat;
             }
         }
 
-        //TODO: muss später nach der ID gehen und nicht nach den Titel
-
         this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,msgs);
         ListView lv = (ListView)findViewById(R.id.msg_list_view);
         if (lv != null)
         {
             lv.setAdapter(msgListAdapter);
-            /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    Intent intent = new Intent(Chat.this,ChatDetailActivity.class);
-
-                    intent.putExtra(CHAT_TITLE,chats.get(position).getTitle());
-                    startActivity(intent);
-                }
-            });
-            */
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,7 +58,8 @@ public class ChatDetailActivity extends AppCompatActivity {
         }
         Snackbar.make(view, msg_string, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        chat.sendMessage(msg_string);
+
+        chat.sendMessage(new ImplContent(msg_string));
 
         this.msgListAdapter.notifyDataSetChanged();
         msg_text.getText().clear();

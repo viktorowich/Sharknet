@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 
 import java.sql.Timestamp;
@@ -10,43 +10,48 @@ import java.util.List;
  */
 public class ImplMessage implements Message {
 
-	String message;
+	Profile owner;
 	Contact sender;
 	List<Contact> recipient_list;
 	Timestamp time;
 	boolean isSigned, isEncrypted;
+	Content content;
+	Boolean disliked = false;
 
 	/**
 	 * Constructor for Messages which are from the Datebase and are not going to be sended, just used by the API to fill List of Messages
-	 * @param message
+	 * @param content
 	 * @param time
 	 * @param sender
 	 * @param recipient_list
 	 * @param isSigned
      * @param isEncrypted
      */
-	public ImplMessage(String message, Timestamp time, Contact sender, List<Contact> recipient_list, boolean isSigned, boolean isEncrypted){
-		this.message = message;
+	public ImplMessage(Content content, Timestamp time, Contact sender, Profile owner, List<Contact> recipient_list, boolean isSigned, boolean isEncrypted){
+		this.content = content;
 		this.time = time;
 		this.sender = sender;
 		this.recipient_list= recipient_list;
 		this.isSigned = isSigned;
 		this.isEncrypted = isEncrypted;
+		this.owner = owner;
 
 	}
 
 	/**
 	 * Constuctor for New Messages that are going to be sended
-	 * @param message
+	 * @param content
 	 * @param recipient_list
      */
 
-	public ImplMessage(String message, List<Contact> recipient_list){
-		this.message = message;
+	public ImplMessage(Content content, List<Contact> recipient_list, Contact sender, Profile owner){
+		this.content = content;
+		this.owner = owner;
 		this.recipient_list = recipient_list;
+		this.sender = sender;
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date now = calendar.getTime();
-		time = new Timestamp(now.getTime());
+		time = new java.sql.Timestamp(now.getTime());
 		sendMessage();
 	}
 
@@ -75,10 +80,8 @@ public class ImplMessage implements Message {
 	}
 
 	@Override
-	public String getContent() {
-		return message;
-
-		//ToDo: Implement Filefunctionality
+	public Content getContent() {
+		return content;
 	}
 
 	@Override
@@ -95,6 +98,15 @@ public class ImplMessage implements Message {
 	public void deleteMessage() {
 		//ToDo: Shark - delete the message from the Database
 
+		Chat chat = getChat();
+		DummyDB.getInstance().removeMessage(this, chat);
+
+	}
+
+	@Override
+	public void dislike() {
+		disliked = true;
+		//ToDo: Shark - safe that the message was disliked
 	}
 
 	/**
@@ -103,22 +115,31 @@ public class ImplMessage implements Message {
      */
 
 	private Chat getChat(){
+		//Implementation of DummyDB
+		//ToDo: Shark - lookup for the Chat
 		DummyDB db = DummyDB.getInstance();
-		List<Chat> chats = db.getChat_list();
+		List<Chat> chats = db.getChat_list(owner);
 		for(Chat c : chats){
 			List<Contact> cs = c.getContacts();
 			if(cs.equals(recipient_list)){
 				return c;
 			}
-/*			for(Contact currentc : cs){
-				if(currentc.getUID().equals(rec_uid)){
-					return c;
-				}
-		}
-*/
 		}
 		return null;
 
 	}
-	//ToDo: Dummy - does not work with groupchats
+
+	@Override
+	public boolean isMine(){
+		if(sender.isEqual(owner.getContact())){
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public boolean isdisliked() {
+		return disliked;
+	}
+
 }

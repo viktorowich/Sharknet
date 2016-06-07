@@ -1,7 +1,6 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
-//ToDo: Clearify - Messages for Groupchats how to Implement
-
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  * Interface for the Messages used in Chats
  */
 
-public interface Message {
+public interface Message extends Timeable, ContainsContent {
 	/**
 	 * Returns the Date, Time when a message was created
 	 * @return
@@ -31,8 +30,8 @@ public interface Message {
 	 * returns the content of a Message
 	 * @return
      */
-	//ToDo: Implement - File - Mime Type integrieren
-    public String getContent();
+    public Content getContent();
+
 
 	/**
 	 * valuates if a Message was signed
@@ -50,4 +49,21 @@ public interface Message {
 	 * deletes the message from a chat
 	 */
 	public void deleteMessage();
+
+	/**
+	 * marks the Message as disliked. Shark will collect dislikes and after an special amount it will inform the author
+	 */
+	public void dislike();
+
+	/**
+	 * Returns if the Comment is disliked
+	 */
+	public boolean isdisliked();
+
+	/**
+	 * returns if the Message is sent by the user
+	 * @return
+     */
+	public boolean isMine();
+
 }

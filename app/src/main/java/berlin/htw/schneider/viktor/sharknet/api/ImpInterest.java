@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 //ToDo: Implement - Methods for InterestMgmt
 

@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,16 +10,25 @@ import java.util.List;
  */
 public class ImplProfile implements Profile {
 
-	//ToDo: Implement - Profil hat eigene Kontakte
-	//TODo: Seperate Datasets for Profiles
-
-
 	Contact c;
 	String password ="";
+	Setting setting;
+	Blacklist blacklist;
 
+	/**
+	 * Constructor for new Profiles which are going to be saved
+	 * @param c
+     */
 	public ImplProfile(Contact c){
 		this.c = c;
 	}
+
+	public ImplProfile(Contact c, String password, Setting setting){
+		this.c = c;
+		this.password = password;
+		this.setting = setting;
+	}
+
 
 	@Override
 	public Contact getContact() {
@@ -76,7 +85,19 @@ public class ImplProfile implements Profile {
 	}
 	//ToDo: Implement - Interest
 	//ToDo: Implement - Settings
-	//ToDo: Implement - Generate KeyPairs
-	//ToDo: Clearify - How Notifications for the GUI Work (Action Listener)
+
+	@Override
+	public boolean isEqual(Profile p){
+		if(p.getContact().isEqual(c)) return true;
+		else return false;
+	}
+
+	@Override
+	public Blacklist getBlacklist() {
+		if(blacklist == null){
+			blacklist = new ImplBlacklist(this);
+		}
+		return blacklist;
+	}
 
 }

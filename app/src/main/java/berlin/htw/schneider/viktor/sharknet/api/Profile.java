@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 import java.util.List;
 
@@ -45,4 +45,17 @@ public interface Profile {
 	 * Method to set password
 	 */
 	public void setPassword(String password);
+
+	/**
+	 * Returns true if profiles are equal
+	 * @param p
+	 * @return
+     */
+	public boolean isEqual(Profile p);
+
+	/**
+	 * Returns the Blacklist of the Profile
+	 * @return
+     */
+	public Blacklist getBlacklist();
 }

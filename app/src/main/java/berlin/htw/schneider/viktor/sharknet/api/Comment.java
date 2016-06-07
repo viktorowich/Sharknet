@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 import java.sql.Timestamp;
 
@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  *
  * Interface represents the comments belonging to feeds
  */
-public interface Comment {
+public interface Comment extends Timeable, ContainsContent {
 
 	/**
 	 * Returns the author of a comment
@@ -30,8 +30,8 @@ public interface Comment {
 	 * returns the content of a comment
 	 * @return
 	 */
-	//ToDo: Implement - File - Mime Type integrieren
-    public String getContent();
+
+    public Content getContent();
 
 	/**
 	 * Deletes Comment from DB
@@ -39,8 +39,14 @@ public interface Comment {
 	public void delete();
 
 	/**
-	 * safes the comment in the DB and sends it
+	 * marks the Comment as disliked. Shark will collect dislikes and after an special amount it will inform the author
 	 */
-	public void save();
+	public void dislike();
+
+	/**
+	 * Returns if the Comment is disliked
+	 */
+	public boolean isdisliked();
+
 }
 

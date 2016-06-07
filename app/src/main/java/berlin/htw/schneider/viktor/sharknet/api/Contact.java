@@ -1,4 +1,4 @@
-package berlin.htw.schneider.viktor.sharknet.api;
+package net.sharksystem.sharknet.api;
 
 import java.util.List;
 
@@ -30,9 +30,9 @@ public interface Contact {
 	 * Returns the profilepicture of a contact
 	 * @return
      */
-	//ToDo: Implement - File - Mime Type integrieren
-    public String getPicture();
-	public void setPicture(String pic);
+
+    public Content getPicture();
+	public void setPicture(Content pic);
 
 	/**
 	 * returns the PublicKey of the contact
@@ -51,10 +51,6 @@ public interface Contact {
 	 */
 	public void update();
 
-	/**
-	 * Safes the Contact in the KB
-	 */
-	public void save();
 
 	/**
 	 * returns a List of all Interests the profile is interested in
@@ -62,5 +58,15 @@ public interface Contact {
 	 */
 	public List<Interest> getInterests();
 
+	/**
+	 * Method to evaluate is a Contact is equal to another
+	 * @return
+     */
+	public boolean isEqual(Contact c);
+
+	/**
+	 * Method returns the Owner of the Contact
+	 */
+	public Profile getOwner();
 
 }

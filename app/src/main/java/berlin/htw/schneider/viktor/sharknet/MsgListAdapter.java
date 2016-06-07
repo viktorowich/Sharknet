@@ -40,7 +40,7 @@ public class MsgListAdapter extends ArrayAdapter<Message>
         }
         else
         {
-            text.setText(msg.getContent());
+            //text.setText(msg.getContent());
             //text.setText("nicht Nulli aber trotzdem hier!");
         }
 

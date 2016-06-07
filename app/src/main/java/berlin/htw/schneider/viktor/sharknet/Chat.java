@@ -22,7 +22,7 @@ public class Chat extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
 
-    public static final String CHAT_TITLE ="CHAT_TITLE" ;
+    public static final String CHAT_ID ="CHAT_ID" ;
     private List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats;
 
     @Override
@@ -61,7 +61,8 @@ public class Chat extends AppCompatActivity
                 {
                     Intent intent = new Intent(Chat.this,ChatDetailActivity.class);
 
-                    intent.putExtra(CHAT_TITLE,chats.get(position).getTitle());
+                    //identifys the chat for the detailView
+                    intent.putExtra(CHAT_ID,chats.get(position).getID());
                     startActivity(intent);
                 }
             });
