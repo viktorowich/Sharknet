@@ -1,6 +1,5 @@
-package net.sharksystem.sharknet.api;
+package berlin.htw.schneider.viktor.sharknet.api;
 
-import net.sharksystem.sharknet.api.utils.ResetOnCloseInputStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

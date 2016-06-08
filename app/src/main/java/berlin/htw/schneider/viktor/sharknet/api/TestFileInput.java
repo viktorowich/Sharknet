@@ -1,4 +1,4 @@
-package net.sharksystem.sharknet.api;
+package berlin.htw.schneider.viktor.sharknet.api;
 
 import java.io.*;
 import java.util.List;

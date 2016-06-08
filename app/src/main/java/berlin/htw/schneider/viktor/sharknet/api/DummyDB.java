@@ -1,9 +1,10 @@
-package net.sharksystem.sharknet.api;
+package berlin.htw.schneider.viktor.sharknet.api;
 
-import java.awt.*;
+
+
+//import java.awt.*;
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by timol on 28.05.2016.

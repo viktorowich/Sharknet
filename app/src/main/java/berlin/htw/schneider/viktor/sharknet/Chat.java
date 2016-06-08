@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.util.Log;
+import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,9 +38,12 @@ public class Chat extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                startActivity(new Intent(Chat.this,ChatNew.class));
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -44,24 +52,26 @@ public class Chat extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        assert drawer != null;
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
 
         chats = MainActivity.implSharkNet.getChats();
         ChatListAdapter chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
         ListView lv = (ListView)findViewById(R.id.chatsListView);
-        if (lv != null) {
+        if (lv != null)
+        {
             lv.setAdapter(chatListAdapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
                     Intent intent = new Intent(Chat.this,ChatDetailActivity.class);
-
-                    //identifys the chat for the detailView
+                    //identifies the chat for the detailView
                     intent.putExtra(CHAT_ID,chats.get(position).getID());
                     startActivity(intent);
                 }
@@ -83,7 +93,7 @@ public class Chat extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.contacts, menu);
+        getMenuInflater().inflate(R.menu.chat, menu);
         return true;
     }
 
@@ -110,25 +120,23 @@ public class Chat extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.chat) {
-            Intent intent = new Intent(this, Chat.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.timeline) {
-            Intent intent = new Intent(this, Timeline.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.contact) {
-            Intent intent = new Intent(this, Contacts.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.profile) {
-            Intent intent = new Intent(this, Profile.class);
-            startActivity(intent);
-            return true;
+        switch (id)
+        {
+            case R.id.chat:
+                startActivity(new Intent(this, Chat.class));
+                return true;
+            case R.id.timeline:
+                startActivity(new Intent(this, Timeline.class));
+                return true;
+            case R.id.contact:
+                startActivity(new Intent(this, Contacts.class));
+                return true;
+            case R.id.profile:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.inbox:
+                startActivity(new Intent(this, Inbox.class));
+                return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

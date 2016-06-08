@@ -1,6 +1,7 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,19 +33,11 @@ public class MsgListAdapter extends ArrayAdapter<Message>
         }
 
         Message msg = msgs.get(position);
+
         TextView text = (TextView) convertView.findViewById(R.id.msg);
-        //TODO: sollte nur passieren wenn der Chat leer ist.
-        if(msg.getContent() == null)
-        {
-            text.setText("Nulli");
-        }
-        else
-        {
-            //text.setText(msg.getContent());
-            //text.setText("nicht Nulli aber trotzdem hier!");
-        }
+        String s = new java.text.SimpleDateFormat("HH:mm").format(msg.getTimestamp());
+        text.setText(String.format("%s      %s", msg.getContent().getMessage(), s));
 
         return convertView;
     }
-
 }

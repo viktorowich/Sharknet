@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import berlin.htw.schneider.viktor.sharknet.api.Contact;
 
 public class Timeline extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,25 +73,23 @@ public class Timeline extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.chat) {
-            Intent intent = new Intent(this, Chat.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.timeline) {
-            Intent intent = new Intent(this, Timeline.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.contact) {
-            Intent intent = new Intent(this, Contacts.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.profile) {
-            Intent intent = new Intent(this, Profile.class);
-            startActivity(intent);
-            return true;
+        switch (id)
+        {
+            case R.id.chat:
+                startActivity(new Intent(this, Chat.class));
+                return true;
+            case R.id.timeline:
+                startActivity(new Intent(this, Timeline.class));
+                return true;
+            case R.id.contact:
+                startActivity(new Intent(this, Contacts.class));
+                return true;
+            case R.id.profile:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.inbox:
+                startActivity(new Intent(this, Inbox.class));
+                return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

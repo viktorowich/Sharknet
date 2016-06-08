@@ -9,12 +9,17 @@ import android.view.View;
 
 import android.widget.EditText;
 import android.widget.ListView;
+import berlin.htw.schneider.viktor.sharknet.api.ImplContent;
+import berlin.htw.schneider.viktor.sharknet.api.Message;
+
+import java.util.List;
 
 
 public class ChatDetailActivity extends AppCompatActivity {
 
     private berlin.htw.schneider.viktor.sharknet.api.Chat chat ;
     private MsgListAdapter msgListAdapter;
+    private int chatID ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,18 +27,21 @@ public class ChatDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        int chatID = getIntent().getIntExtra(Chat.CHAT_ID,0);
+       this.chatID = getIntent().getIntExtra(Chat.CHAT_ID,0);
 
-        List<net.sharksystem.sharknet.api.Message> msgs = null;
+        List<Message> msgs = null;
         List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
 
-        //TODO: not the best way // would be better to use getChatbyID()
+        Toolbar t = (Toolbar) findViewById(R.id.toolbar_chatdetail);
+        setSupportActionBar(t);
+
         for(berlin.htw.schneider.viktor.sharknet.api.Chat chat : chats)
         {
             if(chat.getID() == chatID)
             {
                 msgs = chat.getMessages();
                 this.chat = chat;
+                getSupportActionBar().setTitle(this.chat.getTitle());
             }
         }
 
@@ -54,15 +62,37 @@ public class ChatDetailActivity extends AppCompatActivity {
         String msg_string = msg_text.getText().toString();
         if(msg_string.isEmpty())
         {
-            msg_string = "ist leider leer";
+            msg_string = "No message entered!";
+            Snackbar.make(view, msg_string, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
-        Snackbar.make(view, msg_string, Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        else
+        {
+            chat.sendMessage(new ImplContent(msg_string));
+            this.msgListAdapter.notifyDataSetChanged();
+            msg_text.getText().clear();
 
-        chat.sendMessage(new ImplContent(msg_string));
+            List<Message> msgs = null;
+            List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
 
-        this.msgListAdapter.notifyDataSetChanged();
-        msg_text.getText().clear();
+            //TODO: not the best way // would be better to use getChatbyID()
+            for(berlin.htw.schneider.viktor.sharknet.api.Chat chat : chats)
+            {
+                if(chat.getID() == this.chatID)
+                {
+                    msgs = chat.getMessages();
+
+                }
+            }
+            this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,msgs);
+            ListView lv = (ListView)findViewById(R.id.msg_list_view);
+            if (lv != null)
+            {
+                lv.setAdapter(msgListAdapter);
+            }
+            this.chat.update();
+        }
+
 
     }
 }

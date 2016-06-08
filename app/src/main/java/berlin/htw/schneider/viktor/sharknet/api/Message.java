@@ -1,6 +1,6 @@
-package net.sharksystem.sharknet.api;
+package berlin.htw.schneider.viktor.sharknet.api;
 
-import java.sql.Time;
+
 import java.sql.Timestamp;
 import java.util.List;
 

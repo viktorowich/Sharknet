@@ -16,29 +16,37 @@
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/msg_list_view" android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"/>
+            android:id="@+id/msg_list_view"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="75dp"/>
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_alignParentBottom="true"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true">
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/write_msg_edit_text" android:layout_gravity="bottom" android:layout_weight="1"
-                android:hint="write a message" android:maxLines="3"/>
+                android:id="@+id/write_msg_edit_text"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:hint="write a message"
+                android:maxLines="3"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="send"
-                android:id="@+id/send_button" android:layout_gravity="bottom|right"
+                android:id="@+id/send_button"
+                android:layout_gravity="bottom|right"
                 android:layout_weight="1"
                 android:onClick="sendMessage"
         />
 
 
     </LinearLayout>
+
 </RelativeLayout>

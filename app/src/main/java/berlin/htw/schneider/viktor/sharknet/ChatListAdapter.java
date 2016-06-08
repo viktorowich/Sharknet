@@ -38,30 +38,41 @@ public class ChatListAdapter extends ArrayAdapter<berlin.htw.schneider.viktor.sh
         }
 
         Chat chat = chats.get(position);
+
+        //Title
         TextView title = (TextView) convertView.findViewById(R.id.name);
         title.setText(chat.getTitle());
 
+        //Sender + Lastmessage-Text
         TextView text = (TextView) convertView.findViewById(R.id.msg_text);
         List<Message> msgs      = chat.getMessages();
         Message last_msg        = msgs.get(msgs.size()-1);
-        Content content          = last_msg.getContent();
-        String sender = "Nulli";
-
-        // TODO: Nickname vom Sender lässt sich noch nicht abrufen
-        /*if(last_msg.getSender().getNickname() != null)
-        {
-            sender = last_msg.getSender().getNickname();
-        }*/
+        String content         = last_msg.getContent().getMessage();
+        String sender = last_msg.getSender().getNickname();
 
         String last_msg_content = sender+":"+content;
         text.setText(last_msg_content);
 
+        //Image
         ImageView image = (ImageView) convertView.findViewById(R.id.chat_image);
-
+        //TODO: != change to ==  then load image works
         if(chat.getPicture() != null)
         {
-            // TODO: setPicture
+            if(chat.getContacts().size()>1)
+            {
+                image.setImageResource(R.drawable.ic_group_black_24dp);
+            }
+            else
+            {
+                image.setImageResource(R.drawable.ic_person_black_24dp);
+            }
         }
+        else
+        {
+           //TODO: image.setImageResource(chat.getPicture().);
+        }
+
+
 
 
         return convertView;

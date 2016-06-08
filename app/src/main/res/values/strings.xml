@@ -25,4 +25,6 @@
     <string name="name">Name</string>
     <string name="default_msg">Text aus der Nachricht</string>
     <string name="title_activity_chat_detail">ChatDetailActivity</string>
+    <string name="title_activity_chat_new">Create new Chat</string>
+    <string name="new_chat">Chat title</string>
 </resources>

@@ -49,6 +49,15 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="berlin.htw.schneider.viktor.sharknet.Chat"/>
         </activity>
+        <activity
+                android:name=".ChatNew"
+                android:label="@string/title_activity_chat_new"
+                android:parentActivityName=".Chat"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="berlin.htw.schneider.viktor.sharknet.Chat"/>
+        </activity>
     </application>
 
 </manifest>
