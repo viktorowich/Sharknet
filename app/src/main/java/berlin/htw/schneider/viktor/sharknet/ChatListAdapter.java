@@ -26,7 +26,7 @@ public class ChatListAdapter extends ArrayAdapter<berlin.htw.schneider.viktor.sh
     public ChatListAdapter(Context context, int resource, List<Chat> objects)
     {
         super(context, resource, objects);
-        chats = objects;
+        this.chats = objects;
     }
 
     @Override

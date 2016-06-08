@@ -27,4 +27,5 @@
     <string name="title_activity_chat_detail">ChatDetailActivity</string>
     <string name="title_activity_chat_new">Create new Chat</string>
     <string name="new_chat">Chat title</string>
+    <string name="title_activity_con_detail_view">Contact</string>
 </resources>

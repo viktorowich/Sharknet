@@ -24,8 +24,6 @@ public class ChatDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
        this.chatID = getIntent().getIntExtra(Chat.CHAT_ID,0);
 
