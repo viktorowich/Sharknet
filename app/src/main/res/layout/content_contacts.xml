@@ -13,8 +13,6 @@
         tools:showIn="@layout/app_bar_contacts"
         tools:context="berlin.htw.schneider.viktor.sharknet.Contacts">
 
-
-
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

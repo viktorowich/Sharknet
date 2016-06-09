@@ -65,7 +65,17 @@
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="berlin.htw.schneider.viktor.sharknet.Chat"/>
+                    android:value="berlin.htw.schneider.viktor.sharknet.Chat"
+            />
+        </activity>
+        <activity
+                android:name=".ProfileDetail"
+                android:label="@string/title_activity_profile_detail"
+                android:parentActivityName=".Profile"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="berlin.htw.schneider.viktor.sharknet.Profile"/>
         </activity>
     </application>
 

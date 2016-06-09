@@ -13,4 +13,24 @@
         tools:showIn="@layout/app_bar_profile"
         tools:context="berlin.htw.schneider.viktor.sharknet.Profile">
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
+        <Button
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pro_edit"
+                android:id="@+id/pro_edit_button" android:layout_gravity="center_horizontal"
+                android:onClick="callProfileDetail"
+        />
+        <Button android:layout_width="227dp" android:layout_height="wrap_content" android:text="@string/pro_interests"
+                android:id="@+id/pro_interests_button" android:layout_gravity="center_horizontal"/>
+        <Button
+                android:layout_width="222dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pro_keys"
+                android:id="@+id/pro_keys_button" android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 </RelativeLayout>

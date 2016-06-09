@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="berlin.htw.schneider.viktor.sharknet.Profile">
+        tools:context="berlin.htw.schneider.viktor.sharknet.ProfileDetail">
 
     <android.support.design.widget.AppBarLayout
             android:layout_height="wrap_content"
@@ -21,8 +21,6 @@
                 app:popupTheme="@style/PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
-
-
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -31,6 +29,6 @@
             android:layout_margin="@dimen/fab_margin"
             android:src="@android:drawable/ic_input_add" app:backgroundTint="@color/colorAccent"/>
 
-    <include layout="@layout/content_profile"/>
+    <include layout="@layout/content_profile_detail"/>
 
 </android.support.design.widget.CoordinatorLayout>

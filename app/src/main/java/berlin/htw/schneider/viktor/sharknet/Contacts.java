@@ -23,6 +23,7 @@ import java.util.List;
 public class Contacts extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
+    private static final String CONTACT_NICKNAME = "CONTACT_NICKNAME";
     private List<Contact> contacts;
 
     @Override
@@ -61,8 +62,9 @@ public class Contacts extends AppCompatActivity
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-
-                    startActivity(new Intent(Contacts.this,ConDetailView.class));
+                    Intent intent = new Intent(Contacts.this,ConDetailView.class);
+                    intent.putExtra(CONTACT_NICKNAME,contacts.get(position).getNickname());
+                    startActivity(intent);
                 }
             });
         }

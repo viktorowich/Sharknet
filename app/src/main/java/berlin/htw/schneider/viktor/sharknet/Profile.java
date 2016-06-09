@@ -30,6 +30,20 @@ public class Profile extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -94,5 +108,11 @@ public class Profile extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void callProfileDetail(View view)
+    {
+        Intent intent = new Intent(this, ProfileDetail.class);
+        startActivity(intent);
     }
 }

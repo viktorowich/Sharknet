@@ -28,4 +28,11 @@
     <string name="title_activity_chat_new">Create new Chat</string>
     <string name="new_chat">Chat title</string>
     <string name="title_activity_con_detail_view">Contact</string>
+    <string name="pro_edit">My Profile</string>
+    <string name="pro_interests">My Interests</string>
+    <string name="pro_email">My e-Mails</string>
+    <string name="pro_keys">My Keys</string>
+    <string name="title_activity_profile_detail">My Profile</string>
+    <string name="pro_nickname">Nickname</string>
+    <string name="pro_email_label">e-Mail</string>
 </resources>
