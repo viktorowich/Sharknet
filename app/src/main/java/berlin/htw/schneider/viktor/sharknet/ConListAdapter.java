@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import berlin.htw.schneider.viktor.sharknet.api.Contact;
+import net.sharksystem.sharknet.api.Contact;
 
 import java.util.List;
 

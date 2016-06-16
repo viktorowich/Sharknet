@@ -23,7 +23,7 @@ public class Chat extends AppCompatActivity
 {
 
     public static final String CHAT_ID ="CHAT_ID" ;
-    private List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats;
+    private List<net.sharksystem.sharknet.api.Chat> chats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

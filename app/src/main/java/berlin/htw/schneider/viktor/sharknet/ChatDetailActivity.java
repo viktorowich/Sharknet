@@ -9,15 +9,15 @@ import android.view.View;
 
 import android.widget.EditText;
 import android.widget.ListView;
-import berlin.htw.schneider.viktor.sharknet.api.ImplContent;
-import berlin.htw.schneider.viktor.sharknet.api.Message;
+import net.sharksystem.sharknet.api.ImplContent;
+import net.sharksystem.sharknet.api.Message;
 
 import java.util.List;
 
 
 public class ChatDetailActivity extends AppCompatActivity {
 
-    private berlin.htw.schneider.viktor.sharknet.api.Chat chat ;
+    private net.sharksystem.sharknet.api.Chat chat ;
     private MsgListAdapter msgListAdapter;
     private int chatID ;
     @Override
@@ -28,12 +28,12 @@ public class ChatDetailActivity extends AppCompatActivity {
        this.chatID = getIntent().getIntExtra(Chat.CHAT_ID,0);
 
         List<Message> msgs = null;
-        List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
+        List<net.sharksystem.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
 
         Toolbar t = (Toolbar) findViewById(R.id.toolbar_chatdetail);
         setSupportActionBar(t);
 
-        for(berlin.htw.schneider.viktor.sharknet.api.Chat chat : chats)
+        for(net.sharksystem.sharknet.api.Chat chat : chats)
         {
             if(chat.getID() == chatID)
             {
@@ -71,10 +71,10 @@ public class ChatDetailActivity extends AppCompatActivity {
             msg_text.getText().clear();
 
             List<Message> msgs = null;
-            List<berlin.htw.schneider.viktor.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
+            List<net.sharksystem.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
 
             //TODO: not the best way // would be better to use getChatbyID()
-            for(berlin.htw.schneider.viktor.sharknet.api.Chat chat : chats)
+            for(net.sharksystem.sharknet.api.Chat chat : chats)
             {
                 if(chat.getID() == this.chatID)
                 {

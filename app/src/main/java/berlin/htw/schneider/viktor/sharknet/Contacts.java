@@ -15,8 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import berlin.htw.schneider.viktor.sharknet.api.Contact;
-import berlin.htw.schneider.viktor.sharknet.api.ImplSharkNet;
+import net.sharksystem.sharknet.api.Contact;
 
 import java.util.List;
 

@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import berlin.htw.schneider.viktor.sharknet.api.ImplSharkNet;
+import net.sharksystem.sharknet.api.ImplSharkNet;
 
 public class Inbox extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

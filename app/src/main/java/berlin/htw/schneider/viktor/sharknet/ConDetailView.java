@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-import berlin.htw.schneider.viktor.sharknet.api.Contact;
+import net.sharksystem.sharknet.api.Contact;
 
 import java.util.List;
 import java.util.Objects;

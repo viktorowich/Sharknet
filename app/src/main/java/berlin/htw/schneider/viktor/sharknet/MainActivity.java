@@ -1,18 +1,10 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import berlin.htw.schneider.viktor.sharknet.api.ImplSharkNet;
+import net.sharksystem.sharknet.api.ImplSharkNet;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import berlin.htw.schneider.viktor.sharknet.api.*;
-import berlin.htw.schneider.viktor.sharknet.api.Chat;
+import net.sharksystem.sharknet.api.*;
 
 
 import java.util.List;
@@ -18,12 +17,12 @@ import java.util.List;
  * Reads the Information from the Chat-List and
  * fills the List-Items-Layout.
  */
-public class ChatListAdapter extends ArrayAdapter<berlin.htw.schneider.viktor.sharknet.api.Chat>
+public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.Chat>
 {
 
-    private List<Chat> chats;
+    private List<net.sharksystem.sharknet.api.Chat> chats;
 
-    public ChatListAdapter(Context context, int resource, List<Chat> objects)
+    public ChatListAdapter(Context context, int resource, List<net.sharksystem.sharknet.api.Chat> objects)
     {
         super(context, resource, objects);
         this.chats = objects;
@@ -37,7 +36,7 @@ public class ChatListAdapter extends ArrayAdapter<berlin.htw.schneider.viktor.sh
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.line_item_chat,parent,false);
         }
 
-        Chat chat = chats.get(position);
+        net.sharksystem.sharknet.api.Chat chat = chats.get(position);
 
         //Title
         TextView title = (TextView) convertView.findViewById(R.id.name);
