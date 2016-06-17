@@ -15,7 +15,7 @@
     <string name="chat">Chat</string>
     <string name="timeline">Timeline</string>
     <string name="profile">Profile</string>
-    <string name="Contact">Contact</string>
+    <string name="Contacts">Contacts</string>
     <string name="help">Help</string>
     <string name="about">About</string>
     <string name="title_activity_chat">Chat</string>
@@ -35,4 +35,6 @@
     <string name="title_activity_profile_detail">My Profile</string>
     <string name="pro_nickname">Nickname</string>
     <string name="pro_email_label">e-Mail</string>
+    <string name="send">send</string>
+    <string name="write_a_message">write a message</string>
 </resources>

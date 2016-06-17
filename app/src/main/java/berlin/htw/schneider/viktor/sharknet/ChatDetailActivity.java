@@ -1,12 +1,14 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import net.sharksystem.sharknet.api.ImplContent;
@@ -50,6 +52,13 @@ public class ChatDetailActivity extends AppCompatActivity {
             lv.setAdapter(msgListAdapter);
         }
 
+        EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
+        Button b = (Button) findViewById(R.id.send_button);
+        assert b != null;
+        b.setTypeface(type);
+        assert msg_text != null;
+        msg_text.setTypeface(type);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

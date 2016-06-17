@@ -1,9 +1,11 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import net.sharksystem.sharknet.api.ImplSharkNet;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         implSharkNet = new ImplSharkNet();
         implSharkNet.fillWithDummyData();
+
+
     }
 
     public void openChat(View view)

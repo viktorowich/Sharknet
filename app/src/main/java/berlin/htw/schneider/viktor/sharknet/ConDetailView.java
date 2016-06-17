@@ -1,5 +1,6 @@
 package berlin.htw.schneider.viktor.sharknet;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import net.sharksystem.sharknet.api.Contact;
 
 import java.util.List;
@@ -28,31 +30,62 @@ public class ConDetailView extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.con_nickname = getIntent().getStringExtra("CONTACT_NICKNAME");
         getSupportActionBar().setTitle(con_nickname);
-
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
         this.contacts = MainActivity.implSharkNet.getContacts();
+
+        TextView t = (TextView) findViewById(R.id.con_nickname_label);
+        t.setTypeface(type);
+        TextView n = (TextView) findViewById(R.id.con_name_label);
+        n.setTypeface(type);
+        TextView e = (TextView) findViewById(R.id.con_email_label);
+        e.setTypeface(type);
+        TextView p = (TextView) findViewById(R.id.con_phone_label);
+        p.setTypeface(type);
+        TextView no = (TextView) findViewById(R.id.con_note_label);
+        no.setTypeface(type);
+
         for(Contact contact : contacts)
         {
             if(Objects.equals(contact.getNickname(), con_nickname))
             {
                 EditText nickname = (EditText)findViewById(R.id.con_nickname_edit);
                 assert nickname != null;
-                nickname.setText(this.con_nickname);
-                this.name = "no Name";
+                if(contact.getNickname() == null)
+                {
+                    nickname.setTypeface(type);
+                    nickname.setText(this.con_nickname);
+                }
+                else
+                {
+                    nickname.setText(contact.getNickname());
+                }
+
+                // TODO: die funktionen sind noch nicht implementiert
+                this.name = "no Name entered";
                 EditText name = (EditText)findViewById(R.id.con_name_edit);
                 assert name != null;
-                name.setText(this.name);
+                name.setTypeface(type);
+                name.setHint(this.name);
+
+
                 this.email= "no email";
                 EditText email = (EditText)findViewById(R.id.con_email_edit);
                 assert email != null;
-                email.setText(this.email);
+                email.setTypeface(type);
+                email.setHint(this.email);
+
+
                 this.phone= "no phone";
                 EditText phone = (EditText)findViewById(R.id.con_phone_edit);
                 assert phone != null;
-                phone.setText(this.phone);
+                phone.setTypeface(type);
+                phone.setHint(this.phone);
+
                 this.note= "no note";
                 EditText note = (EditText)findViewById(R.id.con_not_edit);
                 assert note != null;
-                note.setText(this.note);
+                note.setTypeface(type);
+                note.setHint(this.note);
             }
         }
 

@@ -1,6 +1,7 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import net.sharksystem.sharknet.api.ImplSharkNet;
 
 public class Inbox extends AppCompatActivity
@@ -29,15 +31,24 @@ public class Inbox extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
+/*
+//TODO: noch nicht klar wie ich jedes menuitem ansprechen kann
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
+        MenuItem mi = (MenuItem) findViewById(R.id.inbox);
+        assert mi != null;
+        TextView t = (TextView) mi.getActionView();
+        t.setTypeface(type);
+*/
     }
 
     @Override
@@ -54,6 +65,7 @@ public class Inbox extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.inbox, menu);
+
         return true;
     }
 

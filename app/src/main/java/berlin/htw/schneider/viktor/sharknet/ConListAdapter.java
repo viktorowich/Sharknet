@@ -1,6 +1,7 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +37,15 @@ public class ConListAdapter extends ArrayAdapter<Contact>
 
         Contact contact = contacts.get(position);
 
-
+        Typeface type = Typeface.createFromAsset(getContext().getAssets(),"fonts/RockSalt.TTF");
         //Name
         TextView title = (TextView) convertView.findViewById(R.id.contact_nickname);
+        title.setTypeface(type);
         title.setText(contact.getNickname());
 
         //key
         TextView name = (TextView) convertView.findViewById(R.id.contact_name);
+        name.setTypeface(type);
         name.setText(contact.getPublicKey());
 
 

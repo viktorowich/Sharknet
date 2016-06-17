@@ -1,6 +1,7 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class MsgListAdapter extends ArrayAdapter<Message>
         Message msg = msgs.get(position);
 
         TextView text = (TextView) convertView.findViewById(R.id.msg);
+        Typeface type = Typeface.createFromAsset(getContext().getAssets(),"fonts/RockSalt.TTF");
+        text.setTypeface(type);
         String s = new java.text.SimpleDateFormat("HH:mm").format(msg.getTimestamp());
         text.setText(String.format("%s      %s", msg.getContent().getMessage(), s));
 

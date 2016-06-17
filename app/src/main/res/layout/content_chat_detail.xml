@@ -27,24 +27,23 @@
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true">
         <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="196dp"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/write_msg_edit_text"
                 android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:hint="write a message"
-                android:maxLines="3"/>
+                android:hint="@string/write_a_message"
+                android:maxLines="3" android:layout_weight="1.25"/>
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="send"
+                android:layout_height="71dp"
+                android:text="@string/send"
                 android:id="@+id/send_button"
                 android:layout_gravity="bottom|right"
-                android:layout_weight="1"
+                android:layout_weight="0.85"
                 android:onClick="sendMessage"
-        />
+                android:textSize="15sp"/>
 
 
     </LinearLayout>
