@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignTop="@+id/chat_new_id" android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/chat_new_title" android:layout_alignParentEnd="true"
             android:id="@+id/linearLayout"
             android:clickable="true">
             <EditText
@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/chat_new_id"
+                    android:id="@+id/chat_new_title"
                     android:hint="@string/new_chat"
                     android:layout_gravity="center_horizontal"/>
         <ListView

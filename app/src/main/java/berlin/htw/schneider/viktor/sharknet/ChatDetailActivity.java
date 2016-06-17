@@ -14,6 +14,7 @@ import android.widget.ListView;
 import net.sharksystem.sharknet.api.ImplContent;
 import net.sharksystem.sharknet.api.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,15 +22,16 @@ public class ChatDetailActivity extends AppCompatActivity {
 
     private net.sharksystem.sharknet.api.Chat chat ;
     private MsgListAdapter msgListAdapter;
-    private int chatID ;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_detail);
 
-       this.chatID = getIntent().getIntExtra(Chat.CHAT_ID,0);
+        int chatID = getIntent().getIntExtra(Chat.CHAT_ID, 0);
 
-        List<Message> msgs = null;
+        List<Message> msgs = new ArrayList<>();
         List<net.sharksystem.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
 
         Toolbar t = (Toolbar) findViewById(R.id.toolbar_chatdetail);
@@ -66,38 +68,32 @@ public class ChatDetailActivity extends AppCompatActivity {
     public void sendMessage(View view)
     {
         EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
-        String msg_string = msg_text.getText().toString();
-        if(msg_string.isEmpty())
-        {
-            msg_string = "No message entered!";
-            Snackbar.make(view, msg_string, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
-        else
-        {
-            chat.sendMessage(new ImplContent(msg_string));
-            this.msgListAdapter.notifyDataSetChanged();
-            msg_text.getText().clear();
 
-            List<Message> msgs = null;
-            List<net.sharksystem.sharknet.api.Chat> chats =  MainActivity.implSharkNet.getChats();
+        String msg_string;
 
-            //TODO: not the best way // would be better to use getChatbyID()
-            for(net.sharksystem.sharknet.api.Chat chat : chats)
+        if (msg_text != null)
+        {
+            msg_string = msg_text.getText().toString().trim();
+
+            if (msg_string.isEmpty())
             {
-                if(chat.getID() == this.chatID)
-                {
-                    msgs = chat.getMessages();
+                Snackbar.make(view, "No message entered!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+            else
+            {
+                chat.sendMessage(new ImplContent(msg_string));
+                this.chat.update();
+                this.msgListAdapter.notifyDataSetChanged();
+                msg_text.getText().clear();
 
+                this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,this.chat.getMessages());
+                ListView lv = (ListView)findViewById(R.id.msg_list_view);
+                if (lv != null)
+                {
+                    lv.setAdapter(msgListAdapter);
                 }
             }
-            this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,msgs);
-            ListView lv = (ListView)findViewById(R.id.msg_list_view);
-            if (lv != null)
-            {
-                lv.setAdapter(msgListAdapter);
-            }
-            this.chat.update();
         }
 
 

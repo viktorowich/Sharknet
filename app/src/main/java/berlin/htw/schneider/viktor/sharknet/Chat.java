@@ -1,7 +1,6 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,13 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -27,6 +24,31 @@ public class Chat extends AppCompatActivity
 
     public static final String CHAT_ID ="CHAT_ID" ;
     private List<net.sharksystem.sharknet.api.Chat> chats;
+    private ChatListAdapter chatListAdapter;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*chats = MainActivity.implSharkNet.getChats();
+        this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
+        ListView lv = (ListView)findViewById(R.id.chatsListView);
+
+        if (lv != null)
+        {
+            lv.setAdapter(chatListAdapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(Chat.this,ChatDetailActivity.class);
+                    //identifies the chat for the detailView
+                    intent.putExtra(CHAT_ID,chats.get(position).getID());
+                    startActivity(intent);
+                }
+            });
+        }*/
+        chatListAdapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +69,6 @@ public class Chat extends AppCompatActivity
             }
         });
 
-
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -63,7 +81,7 @@ public class Chat extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         chats = MainActivity.implSharkNet.getChats();
-        ChatListAdapter chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
+        this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
         ListView lv = (ListView)findViewById(R.id.chatsListView);
 
         if (lv != null)
@@ -80,11 +98,6 @@ public class Chat extends AppCompatActivity
                 }
             });
         }
-
-
-
-
-
     }
 
     @Override

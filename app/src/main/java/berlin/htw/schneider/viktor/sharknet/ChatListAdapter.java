@@ -52,6 +52,7 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
         text.setTypeface(type);
 
         List<Message> msgs      = chat.getMessages();
+        Log.d("adapter", String.valueOf(msgs.size()));
         Message last_msg        = msgs.get(msgs.size()-1);
         String content         = last_msg.getContent().getMessage();
         String sender = last_msg.getSender().getNickname();
