@@ -61,12 +61,11 @@
         <activity
                 android:name=".ConDetailView"
                 android:label="@string/title_activity_con_detail_view"
-                android:parentActivityName=".Chat"
+                android:parentActivityName=".Contacts"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="berlin.htw.schneider.viktor.sharknet.Chat"
-            />
+                    android:value="berlin.htw.schneider.viktor.sharknet.Contacts"/>
         </activity>
         <activity
                 android:name=".ProfileDetail"
@@ -76,6 +75,24 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="berlin.htw.schneider.viktor.sharknet.Profile"/>
+        </activity>
+        <activity
+                android:name=".ConNew"
+                android:label="@string/title_activity_con_new"
+                android:parentActivityName=".Contacts"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="berlin.htw.schneider.viktor.sharknet.Contacts"/>
+        </activity>
+        <activity
+                android:name=".ProfileDetailInterests"
+                android:label="@string/title_activity_profile_detail_interests"
+                android:parentActivityName=".ProfileDetail"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="berlin.htw.schneider.viktor.sharknet.ProfileDetail"/>
         </activity>
     </application>
 

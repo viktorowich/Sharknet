@@ -38,9 +38,8 @@ public class Contacts extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-
-                Snackbar.make(view, "How to exchange Contacts not clear yet.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(Contacts.this,ConNew.class);
+                startActivity(intent);
             }
         });
 

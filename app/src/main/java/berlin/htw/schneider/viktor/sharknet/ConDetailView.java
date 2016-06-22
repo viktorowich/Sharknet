@@ -17,6 +17,7 @@ import java.util.Objects;
 public class ConDetailView extends AppCompatActivity {
 
     private String con_nickname;
+    private Contact contact;
     private List<Contact> contacts;
     private String name,email,phone,note;
 
@@ -48,6 +49,7 @@ public class ConDetailView extends AppCompatActivity {
         {
             if(Objects.equals(contact.getNickname(), con_nickname))
             {
+                this.contact = contact;
                 EditText nickname = (EditText)findViewById(R.id.con_nickname_edit);
                 assert nickname != null;
                 if(contact.getNickname() == null)
@@ -93,11 +95,17 @@ public class ConDetailView extends AppCompatActivity {
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-
-                Snackbar.make(view, "Update Contact not imlemented", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view)
+            {
+                EditText nickname = (EditText)findViewById(R.id.con_nickname_edit);
+                assert nickname != null;
+                ConDetailView.this.con_nickname = nickname.getText().toString();
+                ConDetailView.this.contact.setNickname(con_nickname);
+                //TODO: muss noch in der API erweitert werden um email usw.
+                //ConDetailView.this.contact.setUID();
+                //ConDetailView.this.contact.setPicture();
+                //ConDetailView.this.contact.setPublicKey();
+                finish();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

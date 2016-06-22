@@ -116,4 +116,9 @@ public class Profile extends AppCompatActivity
         Intent intent = new Intent(this, ProfileDetail.class);
         startActivity(intent);
     }
+    public void callProfileDetailInterests(View view)
+    {
+        Intent intent = new Intent(this, ProfileDetailInterests.class);
+        startActivity(intent);
+    }
 }
