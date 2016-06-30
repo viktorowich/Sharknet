@@ -37,7 +37,9 @@ public class ConNew extends AppCompatActivity {
                 EditText note = (EditText) findViewById(R.id.con_not_edit);
 
                 assert nickname != null;
+                // TODO: bei Timmo nachfragen ob ich so richtig mache
                 MainActivity.implSharkNet.newContact(nickname.getText().toString(),"234234234","public key lkajljk234234");
+
                 finish();
 
                 //MainActivity.implSharkNet.newContact(nickname.getText().toString(),)

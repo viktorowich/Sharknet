@@ -13,13 +13,13 @@
         tools:showIn="@layout/activity_chat_detail"
         tools:context="berlin.htw.schneider.viktor.sharknet.ChatDetailActivity">
 
+
     <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/msg_list_view"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="75dp"/>
+            android:layout_marginBottom="75dp" />
+
 
     <LinearLayout
             android:orientation="horizontal"

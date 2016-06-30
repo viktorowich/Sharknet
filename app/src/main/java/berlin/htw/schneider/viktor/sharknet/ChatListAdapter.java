@@ -51,7 +51,7 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
         TextView text = (TextView) convertView.findViewById(R.id.msg_text);
         text.setTypeface(type);
 
-        List<Message> msgs      = chat.getMessages();
+        List<Message> msgs      = chat.getMessages(false);
         Log.d("adapter", String.valueOf(msgs.size()));
         Message last_msg        = msgs.get(msgs.size()-1);
         String content         = last_msg.getContent().getMessage();
@@ -63,8 +63,8 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
         //Image
         ImageView image = (ImageView) convertView.findViewById(R.id.chat_image);
         //TODO: != change to ==  then load image works
-        if(chat.getPicture() != null)
-        {
+        //if(chat.getPicture() != null)
+        //{
             if(chat.getContacts().size()>1)
             {
                 image.setImageResource(R.drawable.ic_group_black_24dp);
@@ -73,11 +73,11 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
             {
                 image.setImageResource(R.drawable.ic_person_black_24dp);
             }
-        }
-        else
-        {
+        //}
+       // else
+        //{
            //TODO: image.setImageResource(chat.getPicture().);
-        }
+        //‚}
 
         return convertView;
     }

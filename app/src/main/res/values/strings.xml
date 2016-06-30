@@ -45,5 +45,7 @@
     <string name="phone_fake">0305655434</string>
     <string name="note">Note</string>
     <string name="some_notes">some notes</string>
-    <string name="title_activity_profile_detail_interests">ProfileDetailInterests</string>
+    <string name="title_activity_profile_detail_interests">Interests</string>
+    <string name="title_activity_timeline_detail_view">New Feed</string>
+    <string name="title">Title</string>
 </resources>

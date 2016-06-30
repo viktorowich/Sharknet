@@ -41,7 +41,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         {
             if(chat.getID() == chatID)
             {
-                msgs = chat.getMessages();
+                msgs = chat.getMessages(false);
                 this.chat = chat;
                 getSupportActionBar().setTitle(this.chat.getTitle());
             }
@@ -87,11 +87,12 @@ public class ChatDetailActivity extends AppCompatActivity {
                 this.msgListAdapter.notifyDataSetChanged();
                 msg_text.getText().clear();
 
-                this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,this.chat.getMessages());
+                this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,this.chat.getMessages(false));
                 ListView lv = (ListView)findViewById(R.id.msg_list_view);
                 if (lv != null)
                 {
                     lv.setAdapter(msgListAdapter);
+                    lv.setSelection(msgListAdapter.getCount()-1);
                 }
             }
         }

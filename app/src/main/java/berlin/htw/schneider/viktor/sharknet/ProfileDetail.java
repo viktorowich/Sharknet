@@ -53,7 +53,7 @@ public class ProfileDetail extends AppCompatActivity
 
                 net.sharksystem.sharknet.api.Profile myprofile =  MainActivity.implSharkNet.getMyProfile();
                 assert nickname != null;
-                MainActivity.implSharkNet.newContact(nickname.getText().toString(),"234234234","public key lkajljk234234");
+                //MainActivity.implSharkNet.newContact(nickname.getText().toString(),"234234234","public key lkajljk234234");
                 Contact mycontact = MainActivity.implSharkNet.getMyProfile().getContact();
                 mycontact.setNickname(nickname.getText().toString());
                 //TODO: mycontact.setPicture();

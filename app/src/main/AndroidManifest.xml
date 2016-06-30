@@ -94,6 +94,15 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="berlin.htw.schneider.viktor.sharknet.ProfileDetail"/>
         </activity>
+        <activity
+                android:name=".TimelineNewFeed"
+                android:label="@string/title_activity_timeline_detail_view"
+                android:parentActivityName=".Timeline"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="berlin.htw.schneider.viktor.sharknet.Timeline"/>
+        </activity>
     </application>
 
 </manifest>

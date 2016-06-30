@@ -10,13 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import net.sharksystem.sharknet.api.Feed;
 import net.sharksystem.sharknet.api.ImplSharkNet;
+
+import java.util.List;
 
 public class Inbox extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    public static ImplSharkNet implSharkNet;
+    private List<Feed> feeds;
+    public TimelineListAdapter timelineListAdapter;
+    private List<net.sharksystem.sharknet.api.Chat> chats;
+    private ChatListAdapter chatListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +41,42 @@ public class Inbox extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+        chats = MainActivity.implSharkNet.getChats();
+        this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
+        ListView lv = (ListView)findViewById(R.id.chatsListView);
+
+        if (lv != null)
+        {
+            lv.setAdapter(chatListAdapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(Inbox.this,ChatDetailActivity.class);
+
+                    intent.putExtra(Chat.CHAT_ID,chats.get(position).getID());
+                    startActivity(intent);
+                }
+            });
+        }
+
+        this.feeds = MainActivity.implSharkNet.getFeeds(true);
+
+        this.timelineListAdapter = new TimelineListAdapter(this,R.layout.line_item_timeline,feeds);
+        ListView feeds_liste = (ListView) findViewById(R.id.feeds_listView);
+        if (feeds_liste != null)
+        {
+            feeds_liste.setAdapter(timelineListAdapter);
+            feeds_liste.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(Inbox.this,Timeline.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);

@@ -29,7 +29,8 @@ public class Chat extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        /*chats = MainActivity.implSharkNet.getChats();
+
+        chats = MainActivity.implSharkNet.getChats();
         this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
         ListView lv = (ListView)findViewById(R.id.chatsListView);
 
@@ -46,8 +47,7 @@ public class Chat extends AppCompatActivity
                     startActivity(intent);
                 }
             });
-        }*/
-        chatListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

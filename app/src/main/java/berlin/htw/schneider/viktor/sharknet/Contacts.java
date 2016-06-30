@@ -26,6 +26,29 @@ public class Contacts extends AppCompatActivity
     private List<Contact> contacts;
 
     @Override
+    protected void onResume()
+    {
+        super.onResume();
+        contacts = MainActivity.implSharkNet.getContacts();
+
+        ConListAdapter conListAdapter = new ConListAdapter(this,R.layout.line_item_con,contacts);
+        ListView lv = (ListView)findViewById(R.id.con_list_view);
+        if (lv != null)
+        {
+            lv.setAdapter(conListAdapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(Contacts.this,ConDetailView.class);
+                    intent.putExtra(CONTACT_NICKNAME,contacts.get(position).getNickname());
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
