@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import net.sharkfw.knowledgeBase.SemanticTag;
+import net.sharkfw.knowledgeBase.TXSemanticTag;
 import net.sharksystem.sharknet.api.Interest;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,39 +20,51 @@ import java.util.List;
 public class InterestsListAdapter extends BaseExpandableListAdapter
 {
     private Activity context;
-    private List<Interest> interests;
-    private Interest interest;
+    private List<TXSemanticTag> txSemanticTags;
+    private HashMap<TXSemanticTag,List<SemanticTag>> semanticTagListHashMap;
 
     public InterestsListAdapter (Activity context,
-                                 List<Interest> interests)
+                                 List<TXSemanticTag> txSemanticTags)
     {
         this.context = context;
-        this.interests = interests;
+        this.txSemanticTags = txSemanticTags;
+        this.semanticTagListHashMap = null;
+
+        for(TXSemanticTag sTag : this.txSemanticTags)
+        {
+            List <SemanticTag> sema =null;
+            // TODO: wirft hier einen fehler
+            while (sTag.subTags().hasMoreElements())
+            {
+                sema.add(sTag.subTags().nextElement());
+            }
+            this.semanticTagListHashMap.put(sTag,sema);
+        }
     }
 
 
     @Override
     public int getGroupCount()
     {
-        return this.interests.size();
+        return this.txSemanticTags.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition)
     {
-        return this.interests.get(groupPosition).getChilds().size();
+        return semanticTagListHashMap.get(this.txSemanticTags.get(groupPosition)).size();
     }
 
     @Override
     public Object getGroup(int groupPosition)
     {
-        return this.interests.get(groupPosition);
+        return this.txSemanticTags.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition)
     {
-        return this.interests.get(groupPosition).getChilds().get(childPosition);
+        return semanticTagListHashMap.get(this.txSemanticTags.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -82,7 +97,7 @@ public class InterestsListAdapter extends BaseExpandableListAdapter
         }
 
         TextView name = (TextView) convertView.findViewById(R.id.interest_name);
-        name.setText(this.interests.get(groupPosition).getName());
+        name.setText(this.txSemanticTags.get(groupPosition).getName());
 
 
         return convertView;
@@ -95,7 +110,7 @@ public class InterestsListAdapter extends BaseExpandableListAdapter
                              View convertView,
                              ViewGroup parent)
     {
-        this.interest = this.interests.get(groupPosition).getChilds().get(childPosition);
+        //this.interest = this.interests.get(groupPosition).getChilds().get(childPosition);
 
         LayoutInflater inflater = this.context.getLayoutInflater();
 
@@ -104,7 +119,7 @@ public class InterestsListAdapter extends BaseExpandableListAdapter
         }
 
         TextView name = (TextView) convertView.findViewById(R.id.sub_interest);
-        name.setText(this.interest.getName());
+        name.setText(semanticTagListHashMap.get(this.txSemanticTags.get(groupPosition)).get(childPosition).getName());
 
         return null;
     }

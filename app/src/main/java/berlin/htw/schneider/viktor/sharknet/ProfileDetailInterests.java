@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
+import net.sharkfw.knowledgeBase.SemanticTag;
+import net.sharkfw.knowledgeBase.TXSemanticTag;
 import net.sharksystem.sharknet.api.Interest;
 
 import java.util.List;
@@ -28,15 +30,15 @@ public class ProfileDetailInterests extends AppCompatActivity
 
         expandableListView = (ExpandableListView) findViewById(R.id.InterestsExpandableListView);
         InterestsListAdapter interestsListAdapter = new InterestsListAdapter(this,
-                MainActivity.implSharkNet.getMyProfile().getContact().getInterests());
+                MainActivity.implSharkNet.getMyProfile().getContact().getInterests().getAllTopics());
         expandableListView.setAdapter(interestsListAdapter);
 
-        Log.d("SIZE", String.valueOf(MainActivity.implSharkNet.getMyProfile().getContact().getInterests().size()));
-        for (Interest interest : MainActivity.implSharkNet.getMyProfile().getContact().getInterests())
+        //Log.d("SIZE", String.valueOf(MainActivity.implSharkNet.getMyProfile().getContact().getInterests().size()));
+        /*for (TXSemanticTag txSemanticTag : MainActivity.implSharkNet.getMyProfile().getContact().getInterests().getAllTopics())
         {
-            Log.d("INTERESTS",interest.getName());
+            Log.d("INTERESTS",txSemanticTag.getName());
         }
-
+*/
 
 
 

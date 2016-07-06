@@ -4,6 +4,13 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    packagingOptions {
+        exclude 'META-INF/javamail.default.address.map'
+        exclude 'META-INF/javamail.default.providers'
+        exclude 'META-INF/mailcap'
+        exclude 'META-INF/javamail.charset.map'
+
+    }
     defaultConfig {
         applicationId "berlin.htw.schneider.viktor.sharknet"
         minSdkVersion 19
@@ -20,12 +27,18 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/../../../SharkNetJavaFX/sharknet-api/src/main/java'
+        main.java.srcDirs += 'src/main/../../../SharkFW/src/main/java'
+
     }
 }
 
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    // https://mvnrepository.com/artifact/javax.mail/mail
+    compile group: 'javax.mail', name: 'mail', version: '1.4.1'
+    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.4.4'
 
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
