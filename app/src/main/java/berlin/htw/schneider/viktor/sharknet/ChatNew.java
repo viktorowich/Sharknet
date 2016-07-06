@@ -39,7 +39,7 @@ public class ChatNew extends AppCompatActivity {
         setSupportActionBar(toolbar);
         selcted_contacts = new ArrayList<>();
         this.contacts = MainActivity.implSharkNet.getContacts();
-
+        // TODO: nimmt Timo noch raus den einen Contact
         contacts.remove(MainActivity.implSharkNet.getMyProfile().getContact());
         ConListAdapter chatListAdapter = new ConListAdapter(this,R.layout.line_item_con,contacts);
         final ListView lv = (ListView)findViewById(R.id.con_list_view);

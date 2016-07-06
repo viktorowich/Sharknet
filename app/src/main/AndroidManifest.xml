@@ -103,6 +103,15 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="berlin.htw.schneider.viktor.sharknet.Timeline"/>
         </activity>
+        <activity
+                android:name=".ProfileSettings"
+                android:label="@string/title_activity_profile_settings"
+                android:parentActivityName=".Profile"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="berlin.htw.schneider.viktor.sharknet.Profile"/>
+        </activity>
     </application>
 
 </manifest>
