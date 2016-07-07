@@ -55,12 +55,12 @@ public class ChatDetailActivity extends AppCompatActivity {
         }
 
         EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
+        //Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
         Button b = (Button) findViewById(R.id.send_button);
         assert b != null;
-        b.setTypeface(type);
+        //b.setTypeface(type);
         assert msg_text != null;
-        msg_text.setTypeface(type);
+        //msg_text.setTypeface(type);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

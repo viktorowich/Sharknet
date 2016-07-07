@@ -29,7 +29,7 @@
         <EditText
                 android:layout_width="196dp"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
+                android:inputType="textMultiLine|textShortMessage"
                 android:ems="10"
                 android:id="@+id/write_msg_edit_text"
                 android:layout_gravity="bottom"
