@@ -55,4 +55,8 @@
     <string name="wifi">Wifi</string>
     <string name="radar">Radar</string>
     <string name="title_activity_new_interest">New Interest</string>
+    <string name="links">links</string>
+    <string name="rechts">rechts</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="save">save</string>
 </resources>

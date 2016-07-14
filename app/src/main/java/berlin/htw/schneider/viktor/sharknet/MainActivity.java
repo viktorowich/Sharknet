@@ -5,13 +5,21 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import net.sharkfw.knowledgeBase.TXSemanticTag;
-import net.sharksystem.sharknet.api.ImplSharkNet;
+import net.sharksystem.sharknet.api.*;
+import net.sharksystem.sharknet.api.Profile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static ImplSharkNet implSharkNet;
+    private List<Profile> profiles = null;
+    int index ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
         implSharkNet = new ImplSharkNet();
         implSharkNet.fillWithDummyData();
+        index = 0;
+        this.profiles = implSharkNet.getProfiles();
 
+        EditText userid = (EditText) findViewById(R.id.userid);
+        assert userid != null;
+        userid.setText(this.profiles.get(index).getContact().getNickname());
         String[][] dummyInterests = {
                 {"Sport", "https://de.wikipedia.org/wiki/Sport"},
                 {"Musik", "https://de.wikipedia.org/wiki/Musik"},
@@ -54,21 +67,33 @@ public class MainActivity extends AppCompatActivity {
         Typeface face= Typeface.createFromAsset(getAssets(),"fonts/RockSalt.ttf");
         NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
         Menu m = nv.getMenu();
-
-
-
-
         txtV.setTypeface(face);
 */
-
-
-
-
-
-
-
-
         startActivity(inbox);
     }
 
+    public void backProfile(View view)
+    {
+        if(index != 0)
+        {
+            index--;
+        }
+        EditText userid = (EditText) findViewById(R.id.userid);
+        assert userid != null;
+        userid.setText(this.profiles.get(index).getContact().getNickname());
+        Toast.makeText(this,"back",Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void nextProfile(View view)
+    {
+        if(index!=this.profiles.size())
+        {
+            index++;
+        }
+        Toast.makeText(this,"next",Toast.LENGTH_SHORT).show();
+        EditText userid = (EditText) findViewById(R.id.userid);
+        assert userid != null;
+        userid.setText(this.profiles.get(index).getContact().getNickname());
+    }
 }

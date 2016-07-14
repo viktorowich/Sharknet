@@ -47,14 +47,16 @@ public class MsgListAdapter extends ArrayAdapter<Message>
         String s = new java.text.SimpleDateFormat("HH:mm").format(msg.getTimestamp());
         builder.append(msg.getContent().getMessage()).append("         ");
         builder.append(s).append("   ");
-        Drawable check = convertView.getResources().getDrawable(R.drawable.check);
-        Drawable cross = convertView.getResources().getDrawable(R.drawable.cross);
+        Drawable check = convertView.getResources().getDrawable(R.drawable.ic_check_green_600_18dp);
+        Drawable cross = convertView.getResources().getDrawable(R.drawable.ic_close_red_300_18dp);
+        assert check != null;
         check.setBounds(0, 0, text.getLineHeight(),text.getLineHeight());
+        assert cross != null;
         cross.setBounds(0, 0, text.getLineHeight(),text.getLineHeight());
         if(msg.isMine())
         {
             text.setGravity(Gravity.END);
-            Log.d("00000000"," ist meiner ");
+            Log.d("00000000"," ist meine ");
         }
 
         if(msg.isEncrypted())

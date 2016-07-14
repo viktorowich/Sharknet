@@ -9,10 +9,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import net.sharksystem.sharknet.api.*;
 
@@ -29,6 +33,54 @@ public class ChatNew extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         selcted_contacts = new ArrayList<>();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_detail_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case R.id.profile_save:
+                if(!selcted_contacts.isEmpty())
+                {
+                    EditText title = (EditText) findViewById(R.id.chat_new_title);
+                    net.sharksystem.sharknet.api.Chat c = MainActivity.implSharkNet.newChat(selcted_contacts);
+
+                    assert title != null;
+                    if(!title.getText().toString().trim().isEmpty())
+                    {
+                        c.setTitle(title.getText().toString());
+                    }
+                    Log.d("ChatNewID", String.valueOf(c.getID()));
+                    // TODO: geht leider wegen der api noch nicht so richtig
+                    c.sendMessage(new ImplContent("Chat was created by "
+                            +MainActivity.implSharkNet.getMyProfile().getContact().getNickname()));
+                    startActivity(new Intent( ChatNew.this, Chat.class ));
+                }
+                else
+                {
+                    //TODO: soll den user mit Snackbar angezeigt werden
+                    Log.d("NewChat","kein Kontakt ausgewählt");
+                }
+
+                return true;
+
+
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+
+
     }
 
     @Override
@@ -74,7 +126,7 @@ public class ChatNew extends AppCompatActivity {
         }
 
         // save new Chat
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener()
         {
@@ -104,7 +156,7 @@ public class ChatNew extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

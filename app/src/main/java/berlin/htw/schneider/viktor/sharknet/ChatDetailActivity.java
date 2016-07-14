@@ -10,6 +10,7 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import net.sharksystem.sharknet.api.ImplContent;
 import net.sharksystem.sharknet.api.Message;
@@ -56,7 +57,7 @@ public class ChatDetailActivity extends AppCompatActivity {
 
         EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
         //Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
-        Button b = (Button) findViewById(R.id.send_button);
+        ImageButton b = (ImageButton) findViewById(R.id.send_button);
         assert b != null;
         //b.setTypeface(type);
         assert msg_text != null;

@@ -67,11 +67,11 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
         //{
             if(chat.getContacts().size()>1)
             {
-                image.setImageResource(R.drawable.ic_group_black_24dp);
+                image.setImageResource(R.drawable.ic_group_pink_600_24dp);
             }
             else
             {
-                image.setImageResource(R.drawable.ic_person_black_24dp);
+                image.setImageResource(R.drawable.ic_person_pink_600_24dp);
             }
         //}
        // else

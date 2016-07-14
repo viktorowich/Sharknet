@@ -35,11 +35,11 @@
                 android:layout_gravity="bottom"
                 android:hint="@string/write_a_message"
                 android:maxLines="3" android:layout_weight="1.25"/>
-        <Button
+        <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="71dp"
-                android:text="@string/send"
                 android:id="@+id/send_button"
+                android:src="@drawable/ic_send_pink_500_36dp"
                 android:layout_gravity="bottom|right"
                 android:layout_weight="0.85"
                 android:onClick="sendMessage"
