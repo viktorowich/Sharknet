@@ -9,6 +9,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +34,15 @@ public class Chat extends AppCompatActivity
         super.onResume();
 
         chats = MainActivity.implSharkNet.getChats();
-        this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
+
+        RecyclerView lv = (RecyclerView)findViewById(R.id.chatsListView);
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        assert lv != null;
+        lv.setLayoutManager(llm);
+        lv.setItemAnimator(new DefaultItemAnimator());
+        lv.setAdapter(chatListAdapter);
+
+        /*this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
         ListView lv = (ListView)findViewById(R.id.chatsListView);
 
         if (lv != null)
@@ -47,7 +58,7 @@ public class Chat extends AppCompatActivity
                     startActivity(intent);
                 }
             });
-        }
+        }*/
     }
 
     @Override
@@ -81,9 +92,15 @@ public class Chat extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         chats = MainActivity.implSharkNet.getChats();
-        this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
-        ListView lv = (ListView)findViewById(R.id.chatsListView);
+        this.chatListAdapter = new ChatListAdapter(chats);
+        RecyclerView lv = (RecyclerView)findViewById(R.id.chatsListView);
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        assert lv != null;
+        lv.setLayoutManager(llm);
+        lv.setItemAnimator(new DefaultItemAnimator());
+        lv.setAdapter(chatListAdapter);
 
+        /*
         if (lv != null)
         {
             lv.setAdapter(chatListAdapter);
@@ -98,6 +115,7 @@ public class Chat extends AppCompatActivity
                 }
             });
         }
+        */
     }
 
     @Override

@@ -41,7 +41,7 @@ public class Inbox extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
+/*
         chats = MainActivity.implSharkNet.getChats();
         this.chatListAdapter = new ChatListAdapter(this,R.layout.line_item_chat,chats);
         ListView lv = (ListView)findViewById(R.id.chatsListView);
@@ -60,7 +60,7 @@ public class Inbox extends AppCompatActivity
                 }
             });
         }
-
+*/
         this.feeds = MainActivity.implSharkNet.getFeeds(true);
 
         this.timelineListAdapter = new TimelineListAdapter(this,R.layout.line_item_timeline,feeds);
