@@ -1,7 +1,6 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +21,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
 {
 
     private List<net.sharksystem.sharknet.api.Chat> chats;
-    Context context;
+
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
         public TextView title,text;
@@ -75,13 +74,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         String last_msg_content = sender+":"+content;
         holder.text.setText(last_msg_content);
 
-        if(chat.getPicture() != null) {
-            if (chat.getContacts().size() > 1) {
-                holder.image.setImageResource(R.drawable.ic_group_pink_600_24dp);
-            } else {
-                holder.image.setImageResource(R.drawable.ic_person_pink_600_24dp);
-            }
+
+        if (chat.getContacts().size() > 1) {
+            holder.image.setImageResource(R.drawable.ic_group_pink_600_24dp);
+        } else {
+            holder.image.setImageResource(R.drawable.ic_person_pink_600_24dp);
         }
+
     }
 
     @Override

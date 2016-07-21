@@ -13,13 +13,18 @@
         tools:showIn="@layout/activity_chat_detail"
         tools:context="berlin.htw.schneider.viktor.sharknet.ChatDetailActivity">
 
-
-    <ListView
+    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:id="@+id/msg_list_view"
+                                           android:layout_marginBottom="75dp"
+    >
+            </android.support.v7.widget.RecyclerView>
+    <!--<ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/msg_list_view"
             android:layout_marginBottom="75dp" />
-
+-->
 
     <LinearLayout
             android:orientation="horizontal"
@@ -43,7 +48,8 @@
                 android:layout_gravity="bottom|right"
                 android:layout_weight="0.85"
                 android:onClick="sendMessage"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+        android:background="@null"/>
 
 
     </LinearLayout>

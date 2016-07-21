@@ -1,8 +1,10 @@
 package berlin.htw.schneider.viktor.sharknet;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import net.sharksystem.sharknet.api.Message;
 
@@ -19,47 +22,60 @@ import java.util.List;
 /**
  * Created by viktorowich on 01/06/16.
  */
-public class MsgListAdapter extends ArrayAdapter<Message>
+public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.MyViewHolder>
 {
     private List<Message> msgs;
+    Drawable check,cross;
 
-    public MsgListAdapter(Context context, int resource, List<Message> objects)
+    public MsgListAdapter( List<Message> objects)
     {
-        super(context, resource, objects);
         msgs = objects;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public class MyViewHolder extends RecyclerView.ViewHolder
     {
-        if(convertView == null)
+        public TextView msg;
+
+
+        public MyViewHolder(View itemView)
         {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.line_item_msg,parent,false);
+            super(itemView);
+            msg = (TextView) itemView.findViewById(R.id.msg);
+             check = itemView.getResources().getDrawable(R.drawable.ic_check_green_600_18dp);
+             cross = itemView.getResources().getDrawable(R.drawable.ic_close_red_300_18dp);
         }
+    }
 
-        Message msg = msgs.get(position);
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.line_item_msg,parent,false);
+        return new MyViewHolder(itemView);
+    }
 
-        TextView text = (TextView) convertView.findViewById(R.id.msg);
-
-        //Typeface type = Typeface.createFromAsset(getContext().getAssets(),"fonts/RockSalt.TTF");
-        //text.setTypeface(type);
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position)
+    {
+        Message message = msgs.get(position);
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        String s = new java.text.SimpleDateFormat("HH:mm").format(msg.getTimestamp());
-        builder.append(msg.getContent().getMessage()).append("         ");
+        String s = new java.text.SimpleDateFormat("HH:mm").format(message.getTimestamp());
+        builder.append(message.getContent().getMessage()).append("         ");
         builder.append(s).append("   ");
-        Drawable check = convertView.getResources().getDrawable(R.drawable.ic_check_green_600_18dp);
-        Drawable cross = convertView.getResources().getDrawable(R.drawable.ic_close_red_300_18dp);
+
         assert check != null;
-        check.setBounds(0, 0, text.getLineHeight(),text.getLineHeight());
+        check.setBounds(0, 0, holder.msg.getLineHeight(),holder.msg.getLineHeight());
         assert cross != null;
-        cross.setBounds(0, 0, text.getLineHeight(),text.getLineHeight());
-        if(msg.isMine())
+        cross.setBounds(0, 0, holder.msg.getLineHeight(),holder.msg.getLineHeight());
+        if(message.isMine())
         {
-            text.setGravity(Gravity.END);
+            //holder.msg.setTextAlignment();
+            holder.msg.setBackgroundColor(Color.MAGENTA);
+            holder.msg.setTextColor(Color.WHITE);
+
             Log.d("00000000"," ist meine ");
         }
 
-        if(msg.isEncrypted())
+        if(message.isEncrypted())
         {
             builder.setSpan(new ImageSpan(check),builder.length() - 1,builder.length(),0);
             Log.d("Viktor","isEncrypted");
@@ -70,7 +86,7 @@ public class MsgListAdapter extends ArrayAdapter<Message>
             Log.d("Viktor","not isEncrypted");
 
         }
-        if (msg.isSigned())
+        if (message.isSigned())
         {
             builder.setSpan(new ImageSpan(check),builder.length() - 2,builder.length(),0);
             Log.d("Viktor","isSigned");
@@ -83,7 +99,7 @@ public class MsgListAdapter extends ArrayAdapter<Message>
 
         }
 
-        if (msg.isVerified())
+        if (message.isVerified())
         {
             builder.setSpan(new ImageSpan(check),builder.length() - 3,builder.length(),0);
             Log.d("Viktor","isVerified");
@@ -95,9 +111,12 @@ public class MsgListAdapter extends ArrayAdapter<Message>
             builder.setSpan(new ImageSpan(cross),builder.length() - 3,builder.length(),0);
 
         }
-Log.d("ENDE","************************************");
-        text.setText(builder);
+        holder.msg.setText(builder);
+    }
 
-        return convertView;
+    @Override
+    public int getItemCount()
+    {
+        return msgs.size();
     }
 }

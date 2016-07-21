@@ -61,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
     public void openChat(View view)
     {
         Intent inbox = new Intent(this, Inbox.class);
-/*
+
+        implSharkNet.setProfile(this.profiles.get(index),"");
+
+        /*
+
         Typeface face= Typeface.createFromAsset(getAssets(),"fonts/RockSalt.ttf");
         NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
         Menu m = nv.getMenu();
@@ -75,23 +79,23 @@ public class MainActivity extends AppCompatActivity {
         if(index != 0)
         {
             index--;
+            EditText userid = (EditText) findViewById(R.id.userid);
+            assert userid != null;
+            userid.setText(this.profiles.get(index).getContact().getNickname());
+            Toast.makeText(this,"back",Toast.LENGTH_SHORT).show();
         }
-        EditText userid = (EditText) findViewById(R.id.userid);
-        assert userid != null;
-        userid.setText(this.profiles.get(index).getContact().getNickname());
-        Toast.makeText(this,"back",Toast.LENGTH_SHORT).show();
     }
 
 
     public void nextProfile(View view)
     {
-        if(index!=this.profiles.size())
+        if(index != this.profiles.size()-1)
         {
             index++;
+            Toast.makeText(this,"next",Toast.LENGTH_SHORT).show();
+            EditText userid = (EditText) findViewById(R.id.userid);
+            assert userid != null;
+            userid.setText(this.profiles.get(index).getContact().getNickname());
         }
-        Toast.makeText(this,"next",Toast.LENGTH_SHORT).show();
-        EditText userid = (EditText) findViewById(R.id.userid);
-        assert userid != null;
-        userid.setText(this.profiles.get(index).getContact().getNickname());
     }
 }

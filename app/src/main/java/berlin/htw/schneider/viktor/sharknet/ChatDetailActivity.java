@@ -3,9 +3,15 @@ package berlin.htw.schneider.viktor.sharknet;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
@@ -19,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChatDetailActivity extends AppCompatActivity {
+public class ChatDetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private net.sharksystem.sharknet.api.Chat chat ;
     private MsgListAdapter msgListAdapter;
@@ -48,11 +54,15 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         }
 
-        this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,msgs);
-        ListView lv = (ListView)findViewById(R.id.msg_list_view);
+        this.msgListAdapter = new MsgListAdapter(msgs);
+        RecyclerView lv = (RecyclerView)findViewById(R.id.msg_list_view);
         if (lv != null)
         {
+            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+            lv.setLayoutManager(llm);
+            lv.setItemAnimator(new DefaultItemAnimator());
             lv.setAdapter(msgListAdapter);
+
         }
 
         EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
@@ -65,6 +75,12 @@ public class ChatDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.chat_detail, menu);
+        return true;
+    }
 
     public void sendMessage(View view)
     {
@@ -83,21 +99,37 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
             else
             {
-                chat.sendMessage(new ImplContent(msg_string));
+                chat.sendMessage(new ImplContent(msg_string,MainActivity.implSharkNet.getMyProfile()));
                 this.chat.update();
                 this.msgListAdapter.notifyDataSetChanged();
                 msg_text.getText().clear();
-
-                this.msgListAdapter = new MsgListAdapter(this,R.layout.line_item_msg,this.chat.getMessages(false));
-                ListView lv = (ListView)findViewById(R.id.msg_list_view);
-                if (lv != null)
+                for(net.sharksystem.sharknet.api.Chat c: MainActivity.implSharkNet.getChats())
                 {
-                    lv.setAdapter(msgListAdapter);
-                    lv.setSelection(msgListAdapter.getCount()-1);
+                    if(c.getID()==this.chat.getID())
+                    {
+                        this.msgListAdapter = new MsgListAdapter(this.chat.getMessages(false));
+                        RecyclerView lv = (RecyclerView)findViewById(R.id.msg_list_view);
+                        if (lv != null)
+                        {
+                            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+                            lv.setLayoutManager(llm);
+                            lv.setItemAnimator(new DefaultItemAnimator());
+                            lv.setAdapter(msgListAdapter);
+                            lv.scrollToPosition(this.chat.getMessages(false).size()-1);
+                        }
+
+                    }
                 }
+
+
             }
         }
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
     }
 }

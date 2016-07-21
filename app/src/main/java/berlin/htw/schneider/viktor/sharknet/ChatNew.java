@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,17 +31,18 @@ public class ChatNew extends AppCompatActivity {
 
     private List<Contact> contacts;
     private List<Contact> selcted_contacts;
+    ConListAdapterNewChat conListAdapter;
 
     @Override
     protected void onResume() {
         super.onResume();
-        selcted_contacts = new ArrayList<>();
+        selcted_contacts = new ArrayList<Contact>();
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile_detail_menu,menu);
+        inflater.inflate(R.menu.new_chat_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -46,8 +50,10 @@ public class ChatNew extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId()) {
-            case R.id.profile_save:
-                if(!selcted_contacts.isEmpty())
+            case R.id.save:
+                selcted_contacts = conListAdapter.getSelectedContacts();
+                Log.d("WICHTIG ", String.valueOf(selcted_contacts.size()));
+                if(selcted_contacts != null)
                 {
                     EditText title = (EditText) findViewById(R.id.chat_new_title);
                     net.sharksystem.sharknet.api.Chat c = MainActivity.implSharkNet.newChat(selcted_contacts);
@@ -60,13 +66,14 @@ public class ChatNew extends AppCompatActivity {
                     Log.d("ChatNewID", String.valueOf(c.getID()));
                     // TODO: geht leider wegen der api noch nicht so richtig
                     c.sendMessage(new ImplContent("Chat was created by "
-                            +MainActivity.implSharkNet.getMyProfile().getContact().getNickname()));
+                            +MainActivity.implSharkNet.getMyProfile().getContact().getNickname(),MainActivity.implSharkNet.getMyProfile()));
                     startActivity(new Intent( ChatNew.this, Chat.class ));
                 }
                 else
                 {
                     //TODO: soll den user mit Snackbar angezeigt werden
                     Log.d("NewChat","kein Kontakt ausgewählt");
+                    //TODO: Snackbar
                 }
 
                 return true;
@@ -93,36 +100,15 @@ public class ChatNew extends AppCompatActivity {
         this.contacts = MainActivity.implSharkNet.getContacts();
         // TODO: nimmt Timo noch raus den einen Contact
         contacts.remove(MainActivity.implSharkNet.getMyProfile().getContact());
-        ConListAdapter chatListAdapter = new ConListAdapter(this,R.layout.line_item_con,contacts);
-        final ListView lv = (ListView)findViewById(R.id.con_list_view);
+        conListAdapter = new ConListAdapterNewChat(contacts);
+        RecyclerView lv = (RecyclerView)findViewById(R.id.con_list_view);
         if (lv != null)
         {
-            lv.setAdapter(chatListAdapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    if(selcted_contacts != null)
-                    {
-                        if(!selcted_contacts.contains(contacts.get(position)))
-                        {
-                            selcted_contacts.add(contacts.get(position));
-                            lv.getChildAt(position).setBackgroundColor(Color.rgb(255,64,124));
-                        }
-                        else
-                        {
-                            selcted_contacts.remove(contacts.get(position));
-                            lv.getChildAt(position).setBackgroundColor(Color.WHITE);
+            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+            lv.setLayoutManager(llm);
+            lv.setItemAnimator(new DefaultItemAnimator());
+            lv.setAdapter(conListAdapter);
 
-                        }
-                    }
-                    else
-                    {
-                        selcted_contacts.add(contacts.get(position));
-                        lv.getChildAt(position).setBackgroundColor(Color.rgb(255,64,124));
-                    }
-                }
-            });
         }
 
         // save new Chat
@@ -160,4 +146,8 @@ public class ChatNew extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void setContact(View view)
+    {
+
+    }
 }

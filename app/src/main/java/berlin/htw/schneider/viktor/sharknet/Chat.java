@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -146,6 +147,11 @@ public class Chat extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.search) 
+        {
+            Toast.makeText(Chat.this, "Search is not implemented", Toast.LENGTH_SHORT).show();
             return true;
         }
 
