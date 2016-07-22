@@ -60,4 +60,11 @@
     <string name="profile_picture">Profile Picture</string>
     <string name="save">save</string>
     <string name="search">search</string>
+    <string name="profileimage">ProfileImage</string>
+    <string name="feeds">Feeds</string>
+    <string name="system">System</string>
+    <string name="_1_message_unread">1 message unread</string>
+    <string name="delete">delete</string>
+    <string name="blacklist">blacklist</string>
+    <string name="me">Me</string>
 </resources>

@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/contact_name"
+
         />
         <TextView
                 android:layout_width="wrap_content"
@@ -36,6 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox"
+                android:theme="@style/MyEditTextTheme"
+
                 android:layout_gravity="right" android:onClick="setContact"/>
 
     </LinearLayout>

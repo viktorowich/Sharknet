@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import net.sharksystem.sharknet.api.Feed;
 import net.sharksystem.sharknet.api.ImplSharkNet;
 

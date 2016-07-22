@@ -10,11 +10,11 @@
         android:layout_alignParentStart="true"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="363dp"
-                android:layout_height="117dp"
-                android:layout_gravity="center_horizontal"
-                android:weightSum="1">
+            android:orientation="horizontal"
+            android:layout_width="363dp"
+            android:layout_height="117dp"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1" android:gravity="center">
         <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -29,22 +29,25 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_gravity="center_vertical">
+                android:layout_height="wrap_content" android:layout_gravity="center">
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
+                    android:theme="@style/MyEditTextTheme"
                     android:ems="10"
                     android:id="@+id/userid"
-                    android:hint="@string/nickname"/>
+                    android:hint="@string/nickname" android:textAlignment="center"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:theme="@style/MyEditTextTheme"
+
                     android:ems="10"
                     android:id="@+id/password"
                     android:password="false"
-                    android:hint="@string/password"/>
+                    android:hint="@string/password" android:textAlignment="center"/>
         </LinearLayout>
         <ImageButton
                 android:layout_width="40dp"
@@ -56,26 +59,28 @@
                 android:contentDescription="@string/rechts"
                 android:background="@null"/>
     </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:gravity="center">
+        <Button
+                android:layout_width="77dp"
                 android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:gravity="center">
-            <Button
-                    android:layout_width="77dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/create"
-                    android:id="@+id/create"
-            />
-            <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                android:text="@string/create"
+                android:id="@+id/create"
+                android:backgroundTint="@color/sharknet"
+                android:textColor="@color/abc_background_cache_hint_selector_material_light"/>
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
 
-                    android:text="@string/go"
-                    android:id="@+id/go"
-                    android:onClick="openChat"
-                    android:layout_weight="0.32"/>
-        </LinearLayout>
+                android:text="@string/go"
+                android:id="@+id/go"
+                android:onClick="openChat"
+                android:layout_weight="0.32" android:backgroundTint="@color/sharknet"
+                android:textColor="@color/abc_background_cache_hint_selector_material_light"/>
     </LinearLayout>
+</LinearLayout>
 

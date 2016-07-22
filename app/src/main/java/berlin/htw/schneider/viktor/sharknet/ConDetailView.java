@@ -6,9 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import net.sharksystem.sharknet.api.Contact;
 
 import java.util.List;
@@ -22,6 +26,12 @@ public class ConDetailView extends AppCompatActivity {
     private String name,email,phone,note;
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.con_detail_menu, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +41,19 @@ public class ConDetailView extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.con_nickname = getIntent().getStringExtra("CONTACT_NICKNAME");
         getSupportActionBar().setTitle(con_nickname);
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
+        //Typeface type = Typeface.createFromAsset(getAssets(),"fonts/RockSalt.TTF");
         this.contacts = MainActivity.implSharkNet.getContacts();
 
         TextView t = (TextView) findViewById(R.id.con_nickname_label);
-        t.setTypeface(type);
+        //t.setTypeface(type);
         TextView n = (TextView) findViewById(R.id.con_name_label);
-        n.setTypeface(type);
+        //n.setTypeface(type);
         TextView e = (TextView) findViewById(R.id.con_email_label);
-        e.setTypeface(type);
+        //e.setTypeface(type);
         TextView p = (TextView) findViewById(R.id.con_phone_label);
-        p.setTypeface(type);
+        //p.setTypeface(type);
         TextView no = (TextView) findViewById(R.id.con_note_label);
-        no.setTypeface(type);
+        //no.setTypeface(type);
 
         for(Contact contact : contacts)
         {
@@ -54,7 +64,7 @@ public class ConDetailView extends AppCompatActivity {
                 assert nickname != null;
                 if(contact.getNickname() == null)
                 {
-                    nickname.setTypeface(type);
+                    //nickname.setTypeface(type);
                     nickname.setText(this.con_nickname);
                 }
                 else
@@ -66,49 +76,63 @@ public class ConDetailView extends AppCompatActivity {
                 this.name = "no Name entered";
                 EditText name = (EditText)findViewById(R.id.con_name_edit);
                 assert name != null;
-                name.setTypeface(type);
+                //name.setTypeface(type);
                 name.setHint(this.name);
 
 
                 this.email= "no email";
                 EditText email = (EditText)findViewById(R.id.con_email_edit);
                 assert email != null;
-                email.setTypeface(type);
+                //email.setTypeface(type);
                 email.setHint(this.email);
 
 
                 this.phone= "no phone";
                 EditText phone = (EditText)findViewById(R.id.con_phone_edit);
                 assert phone != null;
-                phone.setTypeface(type);
+                //phone.setTypeface(type);
                 phone.setHint(this.phone);
 
                 this.note= "no note";
                 EditText note = (EditText)findViewById(R.id.con_not_edit);
                 assert note != null;
-                note.setTypeface(type);
+                //note.setTypeface(type);
                 note.setHint(this.note);
             }
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                EditText nickname = (EditText)findViewById(R.id.con_nickname_edit);
-                assert nickname != null;
-                ConDetailView.this.con_nickname = nickname.getText().toString();
-                ConDetailView.this.contact.setNickname(con_nickname);
-                //TODO: muss noch in der API erweitert werden um email usw.
-                //ConDetailView.this.contact.setUID();
-                //ConDetailView.this.contact.setPicture();
-                //ConDetailView.this.contact.setPublicKey();
-                finish();
-            }
-        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.save)
+        {
+            EditText nickname = (EditText)findViewById(R.id.con_nickname_edit);
+            assert nickname != null;
+            ConDetailView.this.con_nickname = nickname.getText().toString();
+            ConDetailView.this.contact.setNickname(con_nickname);
+            //TODO: muss noch in der API erweitert werden um email usw.
+            //ConDetailView.this.contact.setUID();
+            //ConDetailView.this.contact.setPicture();
+            //ConDetailView.this.contact.setPublicKey();
+            finish();
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

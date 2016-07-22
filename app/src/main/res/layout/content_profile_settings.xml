@@ -24,24 +24,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nfc"
+                android:theme="@style/MyEditTextTheme"
+
                 android:id="@+id/settings_nfc" android:layout_gravity="center_horizontal" android:checked="false"/>
         <Switch
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/MyEditTextTheme"
+
                 android:text="@string/bluetooth"
                 android:id="@+id/settings_bluetooth" android:layout_gravity="center_horizontal" android:checked="false"/>
-        <Switch android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/tcp"
+        <Switch android:layout_width="match_parent"
+                android:theme="@style/MyEditTextTheme"
+                android:layout_height="wrap_content" android:text="@string/tcp"
                 android:id="@+id/settings_tcp" android:layout_gravity="center_horizontal" android:checked="false"/>
         <Switch android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/MyEditTextTheme"
+
                 android:text="@string/wifi"
                 android:id="@+id/settings_wifi" android:layout_gravity="center_horizontal" android:checked="false"/>
-        <Switch android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/e_mail"
+        <Switch android:layout_width="match_parent"
+                android:theme="@style/MyEditTextTheme"
+                android:layout_height="wrap_content" android:text="@string/e_mail"
                 android:id="@+id/settings_email" android:layout_gravity="center_horizontal" android:checked="false"/>
-        <Switch android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/radar"
+        <Switch android:layout_width="match_parent"
+                android:theme="@style/MyEditTextTheme"
+                android:layout_height="wrap_content" android:text="@string/radar"
                 android:id="@+id/settings_radar" android:layout_gravity="center_horizontal" android:checked="false"/>
         <Spinner
                 android:layout_width="match_parent"
+                android:theme="@style/MyEditTextTheme"
+
                 android:layout_height="wrap_content"
                 android:id="@+id/sync_spinner"/>
     </LinearLayout>

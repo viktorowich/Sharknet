@@ -27,6 +27,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
+                    android:theme="@style/MyEditTextTheme"
                     android:id="@+id/chat_new_title"
                     android:hint="@string/new_chat"
                     android:layout_gravity="center_horizontal"/>

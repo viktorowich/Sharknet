@@ -69,7 +69,7 @@ public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.MyViewHo
         if(message.isMine())
         {
             //holder.msg.setTextAlignment();
-            holder.msg.setBackgroundColor(Color.MAGENTA);
+            holder.msg.setBackgroundColor(Color.parseColor("#FFC2185B"));
             holder.msg.setTextColor(Color.WHITE);
 
             Log.d("00000000"," ist meine ");

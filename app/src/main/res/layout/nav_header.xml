@@ -10,13 +10,13 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               android:theme="@style/ThemeOverlay.AppCompat.Dark"
               android:orientation="vertical"
-              android:gravity="bottom">
+              android:gravity="center|bottom">
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:src="@android:drawable/sym_def_app_icon"
+            android:src="@drawable/ic_person_white_48dp"
             android:id="@+id/imageView"
             android:contentDescription="@string/sharknet_logo"/>
 
@@ -24,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@string/AppName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            android:text="@string/me"
+            android:id="@+id/me"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" android:gravity="center"/>
 
 </LinearLayout>

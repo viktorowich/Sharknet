@@ -8,6 +8,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/feed_image"
+            android:src="@drawable/ic_rss_feed_pink_700_48dp"
             android:contentDescription="Profile Picture"/>
     <LinearLayout
             android:orientation="vertical"

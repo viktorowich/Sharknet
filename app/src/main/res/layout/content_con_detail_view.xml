@@ -21,18 +21,15 @@
             android:layout_height="wrap_content"
     >
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/con_profile_image" android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_person_black_24dp"
-                android:contentDescription="@string/prifiel_image"/>
+                android:layout_width="151dp"
+                android:layout_height="151dp"
+                android:id="@+id/con_profile_image" android:layout_gravity="center"
+                android:src="@drawable/ic_person_pink_700_48dp"
+                android:contentDescription="@string/prifiel_image" android:maxHeight="40dp" android:maxWidth="40dp"
+                android:minHeight="40dp" android:minWidth="40dp" android:nestedScrollingEnabled="false"
+                android:scaleType="fitCenter"/>
 
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NFC"
-                android:id="@+id/nfc_button"/>
         <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,6 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
+                    android:theme="@style/MyEditTextTheme"
+
                     android:hint="@string/nickname"
                     android:ems="10"
                     android:id="@+id/con_nickname_edit"/>
@@ -56,6 +55,8 @@
                     android:id="@+id/con_name_label"/>
             <EditText
                 android:layout_width="wrap_content"
+                android:theme="@style/MyEditTextTheme"
+
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="@string/name"
@@ -73,6 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:theme="@style/MyEditTextTheme"
+
                 android:ems="10"
                 android:hint="@string/email_fake"
                 android:id="@+id/con_email_edit"/>
@@ -86,6 +89,8 @@
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/MyEditTextTheme"
+
                 android:inputType="phone"
                 android:ems="10"
                 android:hint="@string/phone_fake"
@@ -101,6 +106,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
+                android:theme="@style/MyEditTextTheme"
+
                 android:hint="@string/some_notes"
                 android:ems="10"
                 android:id="@+id/con_not_edit"/>

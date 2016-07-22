@@ -117,11 +117,8 @@ public class ChatDetailActivity extends AppCompatActivity implements NavigationV
                             lv.setAdapter(msgListAdapter);
                             lv.scrollToPosition(this.chat.getMessages(false).size()-1);
                         }
-
                     }
                 }
-
-
             }
         }
 

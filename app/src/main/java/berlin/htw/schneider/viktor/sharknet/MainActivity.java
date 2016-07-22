@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.sharkfw.knowledgeBase.TXSemanticTag;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void backProfile(View view)
     {
-        if(index != 0)
+        if(index > 0)
         {
             index--;
             EditText userid = (EditText) findViewById(R.id.userid);
@@ -84,15 +85,28 @@ public class MainActivity extends AppCompatActivity {
             userid.setText(this.profiles.get(index).getContact().getNickname());
             Toast.makeText(this,"back",Toast.LENGTH_SHORT).show();
         }
+        else
+        {
+           index = this.profiles.size()-1;
+            EditText userid = (EditText) findViewById(R.id.userid);
+            assert userid != null;
+            userid.setText(this.profiles.get(index).getContact().getNickname());
+        }
     }
 
 
     public void nextProfile(View view)
     {
-        if(index != this.profiles.size()-1)
+        if(index < this.profiles.size()-1)
         {
             index++;
-            Toast.makeText(this,"next",Toast.LENGTH_SHORT).show();
+            EditText userid = (EditText) findViewById(R.id.userid);
+            assert userid != null;
+            userid.setText(this.profiles.get(index).getContact().getNickname());
+        }
+        else
+        {
+            index = 0;
             EditText userid = (EditText) findViewById(R.id.userid);
             assert userid != null;
             userid.setText(this.profiles.get(index).getContact().getNickname());
