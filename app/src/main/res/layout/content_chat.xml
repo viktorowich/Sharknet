@@ -14,14 +14,7 @@
         tools:context="berlin.htw.schneider.viktor.sharknet.Chat">
 
 
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:id="@+id/chatsListView"
-    >
-
-
-    </android.support.v7.widget.RecyclerView>
-   <!-- <ListView
+    <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/chatsListView"
@@ -29,5 +22,5 @@
             android:layout_alignParentStart="true"
             android:clickable="false"
             android:contextClickable="false"/>
--->
+
 </RelativeLayout>
