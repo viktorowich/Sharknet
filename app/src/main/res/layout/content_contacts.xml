@@ -13,17 +13,10 @@
         tools:showIn="@layout/app_bar_contacts"
         tools:context="berlin.htw.schneider.viktor.sharknet.Contacts">
 
-        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:id="@+id/con_list_view"
-        >
-
-
-        </android.support.v7.widget.RecyclerView>
-       <!-- <ListView
+        <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/con_list_view"
-                android:layout_weight="1.68"/>-->
+                android:layout_weight="1.68"/>
 
 </RelativeLayout>

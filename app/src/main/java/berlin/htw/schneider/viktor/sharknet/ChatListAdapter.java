@@ -2,14 +2,12 @@ package berlin.htw.schneider.viktor.sharknet;
 
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import net.sharksystem.sharknet.api.*;
 
@@ -38,18 +36,14 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
         {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.line_item_chat,parent,false);
         }
-        Typeface type = Typeface.createFromAsset(getContext().getAssets(),"fonts/RockSalt.TTF");
+
         net.sharksystem.sharknet.api.Chat chat = chats.get(position);
         //Title
         TextView title = (TextView) convertView.findViewById(R.id.name);
-        title.setTypeface(type);
-
-
         title.setText(chat.getTitle());
 
         //Sender + Lastmessage-Text
         TextView text = (TextView) convertView.findViewById(R.id.msg_text);
-        text.setTypeface(type);
 
         List<Message> msgs      = chat.getMessages(false);
         Log.d("adapter", String.valueOf(msgs.size()));

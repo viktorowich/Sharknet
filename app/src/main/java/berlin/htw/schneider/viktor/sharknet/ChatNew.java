@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -31,18 +28,17 @@ public class ChatNew extends AppCompatActivity {
 
     private List<Contact> contacts;
     private List<Contact> selcted_contacts;
-    ConListAdapterNewChat conListAdapter;
 
     @Override
     protected void onResume() {
         super.onResume();
-        selcted_contacts = new ArrayList<Contact>();
+        selcted_contacts = new ArrayList<>();
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.new_chat_menu,menu);
+        inflater.inflate(R.menu.profile_detail_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -50,10 +46,8 @@ public class ChatNew extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId()) {
-            case R.id.save:
-                selcted_contacts = conListAdapter.getSelectedContacts();
-                Log.d("WICHTIG ", String.valueOf(selcted_contacts.size()));
-                if(selcted_contacts != null)
+            case R.id.profile_save:
+                if(!selcted_contacts.isEmpty())
                 {
                     EditText title = (EditText) findViewById(R.id.chat_new_title);
                     net.sharksystem.sharknet.api.Chat c = MainActivity.implSharkNet.newChat(selcted_contacts);
@@ -73,7 +67,6 @@ public class ChatNew extends AppCompatActivity {
                 {
                     //TODO: soll den user mit Snackbar angezeigt werden
                     Log.d("NewChat","kein Kontakt ausgewählt");
-                    //TODO: Snackbar
                 }
 
                 return true;
@@ -100,54 +93,38 @@ public class ChatNew extends AppCompatActivity {
         this.contacts = MainActivity.implSharkNet.getContacts();
         // TODO: nimmt Timo noch raus den einen Contact
         contacts.remove(MainActivity.implSharkNet.getMyProfile().getContact());
-        conListAdapter = new ConListAdapterNewChat(contacts);
-        RecyclerView lv = (RecyclerView)findViewById(R.id.con_list_view);
+        ConListAdapterNewChat chatListAdapter = new ConListAdapterNewChat(this,R.layout.line_item_con_new_chat,contacts);
+        final ListView lv = (ListView)findViewById(R.id.con_list_view);
         if (lv != null)
         {
-            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
-            lv.setLayoutManager(llm);
-            lv.setItemAnimator(new DefaultItemAnimator());
-            lv.setAdapter(conListAdapter);
-
-        }
-
-        // save new Chat
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!selcted_contacts.isEmpty())
+            lv.setAdapter(chatListAdapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-                    EditText title = (EditText) findViewById(R.id.chat_new_title);
-                    net.sharksystem.sharknet.api.Chat c = MainActivity.implSharkNet.newChat(selcted_contacts);
-
-                    assert title != null;
-                    if(!title.getText().toString().trim().isEmpty())
+                    if(selcted_contacts != null)
                     {
-                        c.setTitle(title.getText().toString());
-                    }
-                    Log.d("ChatNewID", String.valueOf(c.getID()));
-                    // TODO: geht leider wegen der api noch nicht so richtig
-                    c.sendMessage(new ImplContent("Chat was created by "
-                            +MainActivity.implSharkNet.getMyProfile().getContact().getNickname()));
-                    startActivity(new Intent( ChatNew.this, Chat.class ));
-                }
-                else
-                {
-                    //TODO: soll den user mit Snackbar angezeigt werden
-                    Log.d("NewChat","kein Kontakt ausgewählt");
-                }
+                        if(!selcted_contacts.contains(contacts.get(position)))
+                        {
+                            selcted_contacts.add(contacts.get(position));
+                            lv.getChildAt(position).setBackgroundColor(Color.rgb(255,64,124));
+                        }
+                        else
+                        {
+                            selcted_contacts.remove(contacts.get(position));
+                            lv.getChildAt(position).setBackgroundColor(Color.WHITE);
 
-            }
-        });*/
+                        }
+                    }
+                    else
+                    {
+                        selcted_contacts.add(contacts.get(position));
+                        lv.getChildAt(position).setBackgroundColor(Color.rgb(255,64,124));
+                    }
+                }
+            });
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void setContact(View view)
-    {
-
-    }
 }

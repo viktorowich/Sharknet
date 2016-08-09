@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,7 +22,7 @@ import java.util.List;
 public class Contacts extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
-    public static final String CONTACT_NICKNAME = "CONTACT_NICKNAME";
+    private static final String CONTACT_NICKNAME = "CONTACT_NICKNAME";
     private List<Contact> contacts;
 
     @Override
@@ -34,15 +31,12 @@ public class Contacts extends AppCompatActivity
         super.onResume();
         contacts = MainActivity.implSharkNet.getContacts();
 
-        ConListAdapter conListAdapter = new ConListAdapter(contacts);
-        RecyclerView lv = (RecyclerView)findViewById(R.id.con_list_view);
+        ConListAdapter conListAdapter = new ConListAdapter(this,R.layout.line_item_con,contacts);
+        ListView lv = (ListView)findViewById(R.id.con_list_view);
         if (lv != null)
         {
-            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
-            lv.setLayoutManager(llm);
-            lv.setItemAnimator(new DefaultItemAnimator());
             lv.setAdapter(conListAdapter);
-            /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
@@ -50,7 +44,7 @@ public class Contacts extends AppCompatActivity
                     intent.putExtra(CONTACT_NICKNAME,contacts.get(position).getNickname());
                     startActivity(intent);
                 }
-            });*/
+            });
         }
     }
 
@@ -80,15 +74,12 @@ public class Contacts extends AppCompatActivity
 
         contacts = MainActivity.implSharkNet.getContacts();
 
-        ConListAdapter conListAdapter = new ConListAdapter(contacts);
-        RecyclerView lv = (RecyclerView)findViewById(R.id.con_list_view);
+        ConListAdapter conListAdapter = new ConListAdapter(this,R.layout.line_item_con,contacts);
+        ListView lv = (ListView)findViewById(R.id.con_list_view);
         if (lv != null)
         {
-            LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
-            lv.setLayoutManager(llm);
-            lv.setItemAnimator(new DefaultItemAnimator());
             lv.setAdapter(conListAdapter);
-            /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
@@ -96,7 +87,7 @@ public class Contacts extends AppCompatActivity
                     intent.putExtra(CONTACT_NICKNAME,contacts.get(position).getNickname());
                     startActivity(intent);
                 }
-            });*/
+            });
         }
 
 
