@@ -13,36 +13,17 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:gravity="left">
+              android:gravity="right">
 
-    <android.support.v7.widget.CardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:elevation="12dp"
-            android:id="@+id/view2"
-            app:cardCornerRadius="40dp"
-            android:layout_centerHorizontal="true"
-            android:innerRadius="0dp"
-            android:shape="ring"
-            android:thicknessRatio="1.9">
-        <ImageView
-                android:layout_height="80dp"
-                android:layout_width="match_parent"
-                android:id="@+id/imageView1"
-                android:src="@drawable/ic_person_pink_700_48dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
-        </ImageView>
-    </android.support.v7.widget.CardView>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/msg"
+            android:background="@drawable/corners_round_msg_my"
+            android:textColor="@color/abc_primary_text_disable_only_material_dark"
+            android:layout_marginLeft="40dp"
             android:padding="15dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/corners_round_msg"
-            />
+            android:layout_marginRight="7dp"/>
 </LinearLayout>
     </android.support.v7.widget.CardView>
