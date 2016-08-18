@@ -10,10 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import net.sharksystem.sharknet.api.Message;
 import net.sharksystem.sharknet.api.utils.Resources;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -118,14 +121,20 @@ public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.ViewHold
         String s = new java.text.SimpleDateFormat("HH:mm dd.MM.yyyy").format(message.getTimestamp());
         builder.append(message.getContent().getMessage()+" ");
 
+
+
         // TODO: Ausrufezeigen soll später weg
         if(!message.isdisliked())
         {
-            holder.msg.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_warning_lime_800_18dp, 0);
+            // TODO: sollte vielleicht besser über die Bubble farbe angezeigt werden
+            //holder.msg.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_warning_lime_800_18dp, 0);
         }
+
 
         if(message.isMine())
         {
+
+
             s = "Gesendet am "+s;
             //holder.msg.setTextAlignment();
            // holder.msg.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.sharknet));
@@ -133,6 +142,32 @@ public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.ViewHold
         }
         else
         {
+            if(message.isDierectRecived())
+            {
+                holder.msg.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_send_pink_700_18dp, 0);
+
+            }
+            else
+            {
+                holder.msg.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_send_black_18dp, 0);
+
+            }
+            // TODO: Ausrufezeigen soll später hin
+            if(message.getSender().getPublicKey().isEmpty())
+            {
+                ImageView key;
+                if(message.getSender().getPublicKeyExpiration() != null && message.getSender().getPublicKeyExpiration().before(new Timestamp(System.currentTimeMillis())))
+                {
+                    key = (ImageView) holder.itemView.findViewById(R.id.msg_key);
+
+                }
+                else
+                {
+                    //TODO: soll ein grauer Schlüssel angezeigt werden
+                    key = (ImageView) holder.itemView.findViewById(R.id.msg_key_grey);
+                }
+                key.setVisibility(View.VISIBLE);
+            }
             s = "Empfangen am "+s;
             holder.timestamp.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.cardview_dark_background));
         }
