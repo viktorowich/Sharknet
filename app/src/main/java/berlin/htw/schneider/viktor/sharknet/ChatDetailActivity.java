@@ -9,6 +9,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,12 +28,16 @@ public class ChatDetailActivity extends AppCompatActivity implements NavigationV
     private net.sharksystem.sharknet.api.Chat chat ;
     private MsgListAdapter msgListAdapter;
 
+    private ImageButton send, record;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_detail);
 
+        send = (ImageButton) findViewById(R.id.send_button);
+        record = (ImageButton) findViewById(R.id.record);
         int chatID = getIntent().getIntExtra(Chat.CHAT_ID, 0);
 
         List<Message> msgs = new ArrayList<>();
@@ -58,7 +64,6 @@ public class ChatDetailActivity extends AppCompatActivity implements NavigationV
             lv.setLayoutManager(llm);
             lv.setItemAnimator(new DefaultItemAnimator());
             lv.setAdapter(msgListAdapter);
-
         }
 
         EditText msg_text = (EditText) findViewById(R.id.write_msg_edit_text);
@@ -67,9 +72,41 @@ public class ChatDetailActivity extends AppCompatActivity implements NavigationV
         assert b != null;
         //b.setTypeface(type);
         assert msg_text != null;
+        msg_text.addTextChangedListener(TextEditorWatcher);
         //msg_text.setTypeface(type);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    private final TextWatcher  TextEditorWatcher = new TextWatcher() {
+
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+        {
+            // When No Password Entered
+
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+
+        }
+
+        public void afterTextChanged(Editable s)
+        {
+            String t = s.toString().trim();
+            if(t.length()==0)
+            {
+                //TODO: Button soll von Send zu Micro sich ändern
+                send.setVisibility(View.GONE);
+                record.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                send.setVisibility(View.VISIBLE);
+                record.setVisibility(View.GONE);
+            }
+
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -124,5 +161,30 @@ public class ChatDetailActivity extends AppCompatActivity implements NavigationV
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         return false;
+    }
+
+    public void recordAudio(View view)
+    {
+
+    }
+
+    public void takePicture(View view)
+    {
+
+    }
+
+    public void sendFile(View view)
+    {
+
+    }
+
+    public void addContact(View view)
+    {
+
+    }
+
+    public void sendPicture(View view)
+    {
+
     }
 }

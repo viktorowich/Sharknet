@@ -54,6 +54,7 @@ public class ChatListAdapter extends ArrayAdapter<net.sharksystem.sharknet.api.C
         String last_msg_content = sender+":"+content;
         text.setText(last_msg_content);
 
+
         //Image
         ImageView image = (ImageView) convertView.findViewById(R.id.chat_image);
         //TODO: != change to ==  then load image works

@@ -2,6 +2,7 @@ package berlin.htw.schneider.viktor.sharknet;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import net.sharksystem.sharknet.api.Message;
+import net.sharksystem.sharknet.api.utils.Resources;
 
 import java.util.List;
 
@@ -29,12 +31,13 @@ public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.ViewHold
 
     public class ViewHolderBase extends RecyclerView.ViewHolder
     {
-        public TextView msg;
+        public TextView msg,timestamp;
 
         public ViewHolderBase(View itemView)
         {
             super(itemView);
             msg = (TextView) itemView.findViewById(R.id.msg);
+            timestamp = (TextView) itemView.findViewById(R.id.timestamp);
             //check = itemView.getResources().getDrawable(R.drawable.ic_check_green_600_18dp);
            // cross = itemView.getResources().getDrawable(R.drawable.ic_close_red_300_18dp);
         }
@@ -111,9 +114,32 @@ public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.ViewHold
     {
         Message message = msgs.get(position);
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        //String s = new java.text.SimpleDateFormat("HH:mm").format(message.getTimestamp());
-        builder.append(message.getContent().getMessage());
-        //builder.append(s).append("   ");
+        SpannableStringBuilder builder_msg_inf = new SpannableStringBuilder();
+        String s = new java.text.SimpleDateFormat("HH:mm dd.MM.yyyy").format(message.getTimestamp());
+        builder.append(message.getContent().getMessage()+" ");
+
+        // TODO: Ausrufezeigen soll später weg
+        if(!message.isdisliked())
+        {
+            holder.msg.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_warning_lime_800_18dp, 0);
+        }
+
+        if(message.isMine())
+        {
+            s = "Gesendet am "+s;
+            //holder.msg.setTextAlignment();
+           // holder.msg.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.sharknet));
+            holder.timestamp.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.sharknet));
+        }
+        else
+        {
+            s = "Empfangen am "+s;
+            holder.timestamp.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.cardview_dark_background));
+        }
+        builder_msg_inf.append(s);
+           // builder.setSpan(new ImageSpan(holder.itemView.getResources().getDrawable(R.drawable.ic_warning_lime_800_18dp)),builder.length() - 1,builder.length(),0);
+        //builder_msg_inf.setSpan(new ImageSpan(holder.itemView.getResources().getDrawable(R.drawable.circle_orange)),builder_msg_inf.length() - 2,builder_msg_inf.length(),0);
+        //builder_msg_inf.setSpan(new ImageSpan(holder.itemView.getResources().getDrawable(R.drawable.circle_red)),builder_msg_inf.length() - 3,builder_msg_inf.length(),0);
 /*
         assert check != null;
         check.setBounds(0, 0, holder.msg.getLineHeight(),holder.msg.getLineHeight());
@@ -166,6 +192,7 @@ public class MsgListAdapter extends RecyclerView.Adapter<MsgListAdapter.ViewHold
         }
         */
         holder.msg.setText(builder);
+        holder.timestamp.setText(builder_msg_inf);
     }
 
     @Override
